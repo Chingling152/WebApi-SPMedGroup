@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Senai.WebApi.SpMedGroup.Domains;
 using Senai.WebApi.SpMedGroup.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
     /// <summary>

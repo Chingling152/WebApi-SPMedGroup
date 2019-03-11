@@ -1,6 +1,8 @@
 ﻿using System;
-using Microsoft.AspNetCore.Authorization;
+using System.Linq;
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Senai.WebApi.SpMedGroup.Domains;
 using Senai.WebApi.SpMedGroup.Interfaces;
 using Senai.WebApi.SpMedGroup.Repositories.EntityFramework;
@@ -24,14 +26,19 @@ namespace Senai.WebApi.SpMedGroup.Controllers
             try {
                 return Ok(Repositorio.Listar());
             } catch (Exception exc) {
-                return BadRequest(exc.Message);
+                return BadRequest(exc);
             }
         }
 
-        [HttpGet("Paciente/{ID}")]
+        [HttpGet("Paciente")]
         [Authorize(Roles = "1")]
-        public IActionResult ListarPaciente(int ID) {
+        public IActionResult ListarPaciente() {
             try {
+                int ID = Convert.ToInt32(//convertendo o valor inserido no token para int
+                    HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value//value retorna uma string
+                    // First procura o primeiro valor na array que contenha uma determinada especificação
+                    // nesse caso, é a Claim que é do tipo Jti
+                 );
                 return Ok(Repositorio.ListarPaciente(ID));
             } catch (Exception exc) {
                 return BadRequest(exc.Message);
@@ -39,9 +46,12 @@ namespace Senai.WebApi.SpMedGroup.Controllers
         }
 
         [Authorize(Roles = "Medico")]
-        [HttpGet("Medico/{ID}")]
-        public IActionResult ListarMedico(int ID) {
+        [HttpGet("Medico")]
+        public IActionResult ListarMedico() {
             try {
+                int ID = Convert.ToInt32(
+                    HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value
+                );
                 return Ok(Repositorio.ListarMedico(ID));
             } catch (Exception exc) {
                 return BadRequest(exc.Message);

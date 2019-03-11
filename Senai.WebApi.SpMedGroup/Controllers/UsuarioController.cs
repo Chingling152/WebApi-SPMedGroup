@@ -73,8 +73,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
                 );
 
                 return Ok(new {
-                    Token = new JwtSecurityTokenHandler().WriteToken(token),
-                    Role = token.Claims
+                    Token = new JwtSecurityTokenHandler().WriteToken(token)
                 });
             } catch (Exception exc) {
                 return BadRequest(exc.Message);

@@ -9,8 +9,15 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
     /// </summary>
     public class PacienteRepository : IPacienteRepository {
 
+        /// <summary>
+        /// Muda as informações do paciente
+        /// </summary>
+        /// <param name="paciente">Paciente com os valores já alterados</param>
         public void Alterar(Paciente paciente) {
-            throw new System.NotImplementedException();
+            using (SpMedGroupContext ctx = new SpMedGroupContext()) {
+                ctx.Paciente.Update(paciente);
+                ctx.SaveChanges();
+            }
         }
 
         /// <summary>
