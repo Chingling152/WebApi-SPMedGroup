@@ -36,5 +36,7 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
         /// </summary>
         /// <returns>Uma lista com todos os pacientes</returns>
         public List<Paciente> Listar() => new SpMedGroupContext().Paciente.ToList();
+
+        
     }
 }

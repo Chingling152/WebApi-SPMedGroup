@@ -30,8 +30,8 @@ namespace Senai.WebApi.SpMedGroup.Controllers
             }
         }
 
-        [HttpGet("Paciente")]
-        [Authorize(Roles = "1")]
+        [HttpGet("Pacientes/MinhasConsultas")]
+        [Authorize(Roles = "Paciente")]
         public IActionResult ListarPaciente() {
             try {
                 int ID = Convert.ToInt32(//convertendo o valor inserido no token para int
@@ -45,8 +45,8 @@ namespace Senai.WebApi.SpMedGroup.Controllers
             }
         }
 
+        [HttpGet("Medicos/MinhasConsultas")]
         [Authorize(Roles = "Medico")]
-        [HttpGet("Medico")]
         public IActionResult ListarMedico() {
             try {
                 int ID = Convert.ToInt32(
@@ -71,6 +71,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
         }
 
         [HttpPut]
+        [Route("Alterar")]
         [Authorize(Roles = "Administrador,Medico")]
         public IActionResult Alterar(Consulta consulta) {
             try {
