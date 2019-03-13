@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Senai.WebApi.SpMedGroup.Domains;
 using Senai.WebApi.SpMedGroup.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
     /// <summary>
@@ -26,5 +27,18 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
         /// <returns>Uma lista com todos os medicos</returns>
         public List<Medico> Listar() => new SpMedGroupContext().Medico.ToList();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public Medico VerConsultas(int ID) {
+            Medico medico = new SpMedGroupContext().Medico.Include(x=> x.Consulta).ToList().Find(i => i.IdUsuario == ID);
+
+            if(medico == null)
+                throw new System.NullReferenceException("Não existe Medico com este ID");
+
+            return medico;
+        }
     }
 }

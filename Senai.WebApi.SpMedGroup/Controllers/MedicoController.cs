@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Senai.WebApi.SpMedGroup.Domains;
@@ -38,6 +40,19 @@ namespace Senai.WebApi.SpMedGroup.Controllers {
                 }
                 Repositorio.Cadastrar(medico);
                 return Ok(Repositorio.Listar());
+            } catch (Exception exc) {
+                return BadRequest(exc.Message);
+            }
+        }
+
+        [HttpGet("VerConsultas")]
+        [Authorize(Roles = "Medico,Administrador")]
+        public IActionResult VerConsultas() {
+            try {
+                int ID = Convert.ToInt32(
+                    HttpContext.User.Claims.First(i => i.Type == JwtRegisteredClaimNames.Jti).Value
+                );
+                return Ok(Repositorio.VerConsultas(ID));
             } catch (Exception exc) {
                 return BadRequest(exc.Message);
             }

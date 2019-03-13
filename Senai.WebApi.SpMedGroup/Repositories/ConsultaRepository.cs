@@ -4,7 +4,7 @@ using Senai.WebApi.SpMedGroup.Interfaces;
 
 namespace Senai.WebApi.SpMedGroup.Repositories {
     /// <summary>
-    /// Classe com metodos aplicados do IConsultaRepository (Sem EntityFramework)
+    /// Classe com metodos aplicados do IConsultaRepository (SqlClient)
     /// </summary>
     public class ConsultaRepository : IConsultaRepository {
         public void Alterar(Consulta consulta) {
@@ -16,14 +16,6 @@ namespace Senai.WebApi.SpMedGroup.Repositories {
         }
 
         public List<Consulta> Listar() {
-            throw new System.NotImplementedException();
-        }
-
-        public List<Consulta> ListarMedico(int ID) {
-            throw new System.NotImplementedException();
-        }
-
-        public List<Consulta> ListarPaciente(int ID) {
             throw new System.NotImplementedException();
         }
     }

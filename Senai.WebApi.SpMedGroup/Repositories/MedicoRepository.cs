@@ -15,5 +15,9 @@ namespace Senai.WebApi.SpMedGroup.Repositories {
         public List<Medico> Listar() {
             throw new System.NotImplementedException();
         }
+
+        public Medico VerConsultas(int ID) {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -37,19 +37,5 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
         /// </summary>
         /// <returns>Uma lista com todas as consultas registradas</returns>
         public List<Consulta> Listar() => new SpMedGroupContext().Consulta.ToList();
-
-        /// <summary>
-        /// Lista todas as consultas com a participação de um determinado medico
-        /// </summary>
-        /// <param name="ID">ID do medico selecionado</param>
-        /// <returns>Uma lista com todas as consultas do medico</returns>
-        public List<Consulta> ListarMedico(int ID) => new SpMedGroupContext().Consulta.Where(i => i.IdMedico == ID).ToList();
-
-        /// <summary>
-        /// Lista todas as consultas com a participação de um paciente selecionado
-        /// </summary>
-        /// <param name="ID">ID do paciente</param>
-        /// <returns>Uma lista com todas as consultas do paciente</returns>
-        public List<Consulta> ListarPaciente(int ID) => new SpMedGroupContext().Consulta.Where(i => i.IdPaciente == ID).ToList();
     }
 }

@@ -10,33 +10,36 @@ Desenvolvida na escola SENAI de informatica para a empresa SP Medical Group , a 
 - 2 **[Configurações iniciais](#Configurações-iniciais)**  
  2.1. [Criando Banco de dados](#Criando-banco-de-dados)  
  2.2. [Criando o projeto](#Criando-o-projeto)  
- 2.3. [Definindo relação com o banco](#Definindo-relação-com-o-banco)
+ 2.3. [Definindo relação com o banco](#Definindo-relação-com-o-banco)  
+ 2.4. [Mudando Repositorio](#Mudando-Repositorio)  
  
 - 3 **[Funcionalidades](#Funcionalidades)**  
 
  - 3.1. **[Visualização](#Visualização)**  
  3.1.1. [Visualizar Consultas](#Visualizar-Consultas)  
  3.1.2. [Visualizar Usuarios](#Visualizar-Usuarios)  
- 3.1.3. [Visualizar Usuario](#Visualizar-Usuario)  
+ 3.1.3. [Visualizar Pacientes](#Visualizar-Pacientes)  
+ 3.1.3. [Visualizar Medicos](#Visualizar-Medicos)  
+ 3.1.4. [Visualizar Clinicas](#Visualizar-Clinicas)  
  
  - 3.2. **[Cadastro](#Cadastro)**  
  3.2.1. [Cadastrar Usuarios](#Cadastrar-Usuarios)  
  3.2.2. [Cadastrar Clinicas](#Cadastrar-Clinicas)  
  3.2.3. [Cadastrar Especialidades Medicas](#Cadastrar-Especialidades-Medicas)  
  3.2.4. [Cadastrar Medicos](#Cadastrar-Medicos)  
- 3.2.5 [Cadastrar Pacientes](#Cadastrar-Pacientes)  
- 3.2.6. [Agendar Consultas](#Agendar-Consultas)  
+ 3.2.5. [Cadastrar Pacientes](#Cadastrar-Pacientes)  
+ 3.2.6. [Cadastrar Consultas](#Cadastrar-Consultas)  
  
- - 3.3. **[Alteração](#Cadastro)**  
- 3.3.1. [Alterar especialidades medicas](#Cadastrar-Especialidades-Medicas)  
- 3.3.2. [Cancelar/Alterar Consultas](#Agendar-Consultas)  
+ - 3.3. **[Alteração](#Alteração)**  
+ 3.3.1. [Alterar Especialidades Medicas](#Alterar-Especialidades-Medicas)  
+ 3.3.2. [Cancelar/Alterar Consultas](#Cancelar-Consultas)  
  
- - 3.4. **[Validação](#Validação)**  
+ - 3.4. **[Autenticação](#Autenticação)**  
  3.4.1. [Login](#Login) 
   
 - 4 **[Validação](#Validação)**  
- 4.1 - [Campos](#Campos)  
- 4.2 - [Paginas](#Paginas)  
+ 4.1. - [Campos](#Campos)  
+ 4.2. - [Paginas](#Paginas)  
 
 ## Requisitos  
 A API tem alguns requisitos para que a mesma funcione e seja executada.  
@@ -69,7 +72,7 @@ Antes de iniciar a criação , a API precisa de coisas que precisam ser definida
 O banco de dados do projeto já está importado e conectado com o projeto , mas caso você queira conectar-se a um outro banco de dados , ou caso sua instancia do banco de dados tem o nome diferente ou se você não está usando o SQL Server (apenas respeite as colunas e tabelas por favor...)
 Você pode fazer uma dessas 2 opções  
 - **Menor impacto**
-Se o seu banco de dados tiver as mesmas tabelas e colunas , você poderá apenas ir no arquivo [SpMedGroupContext.cs](#)
+Se o seu banco de dados tiver as mesmas tabelas e colunas , você poderá apenas ir no arquivo [SpMedGroupContext.cs](#https://github.com/Chingling152/WebApi-SPMedGroup/blob/master/Senai.WebApi.SpMedGroup/Contexts/SpMedGroupContext.cs)  
 
 ```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
@@ -96,3 +99,47 @@ Então , caso queira usar outro banco de daos , você terá que importar a bibli
 ** Pasta Domains** : Seria o nome onde ficariam todos os modelos , classes com os dados e variaveis já baseadas em cada tabela  
 ** Pasta Contex** : Ficara os arquivos com as regras , tabelas e valores do banco de dados  
 **Arquivo Context** : O Arquivo onde tem em forma de objeto , uma tabela SQL com uma varias listas de Classes (classes que ficam na pasta **Domains**)  
+
+### Mudando Repositorio  
+A API Tem uma segunda maneira de se conectar ao banco de dados, utilizando SqlClient. Há algumas diferenças na performace mas eu não vou ficar falando sobre isso.   
+Para mudar o repositorio apenas vá no topo de cada script e comente/delete a seguinte parte.  
+``` csharp
+using Senai.WebApi.SpMedGroup.Repositories.EntityFramework;
+// Apague o .EntityFramework para mudar do EntityFramework para o SqlClient
+// As classes possuem o mesmo nome e herdam das mesmas interfaces
+```
+## Funcionalidades  
+
+### Visualização  
+A visualização de dados é bastante segura pode-se dizer , muitas coisas são visiveis apenas para o administrador ou medicos e quase nada é possivel ser acessado sem autenticação.  
+Metodos de visualização sempre usam o verbo **get**
+#### Visualizar Consultas  
+Um **usuario não autenticado** não consegue ver nenhuma consulta de nenhum usuario , enquanto o **Paciente** e o **Medico** conseguem ver consultas que estão relacionadas a eles , e o **Administrador** pode visualizar todas as Consultas do banco de dados.  
+#### Metodos de Visualização  
+- ##### Visualizar Todas as consultas : 
+**Caminho :** *.../api/Consultas*  
+**Retorno :** Todas as consultas cadastradas no banco de dados  
+**Requer  :** Estar logado com privilegios de *Administrador*  
+
+- ##### Visualizar Suas consultas (Paciente)  
+**Caminho :** *.../api/Paciente/VerConsultas*  
+**Retorno :** Todas as consultas suas consultas cadastradas  
+**Requer  :** Estar Logado com privilegios de Paciente  
+
+- ##### Visualizar Suas consultas (Medico)  
+**Caminho :** *.../api/Medico/VerConsultas*  
+**Retorno :** Todas as consultas suas consultas cadastradas  
+**Requer  :** Estar Logado com privilegios de Medico  
+
+#### Visualizar Usuarios  
+Visualizar usuarios é uma das **funções restritas** da API, ou seja, apenas alguem com privilegios de administrador pode acessar esses dados.  
+Nesse metodo há uma pequena diferença entre usar o EntityFramework e o SqlClient
+#### Metodos de Visualização  
+- ##### Visualizar Todos os Usuarios (Entity Framework)  
+**Caminho :** *.../api/Consultas*  
+**Retorno :** Todas os Usuarios cadastrados no banco de dados  
+**Requer  :** Estar logado com privilegios de *Administrador*  
+- ##### Visualizar Todos os Usuarios (SqlClient)  
+**Caminho :** *.../api/Consultas*  
+**Retorno :** Todas os Usuarios cadastrados (Exceto administradores) no banco de dados  
+**Requer  :** Estar logado com privilegios de *Administrador*  

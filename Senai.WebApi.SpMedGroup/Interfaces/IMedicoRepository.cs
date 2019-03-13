@@ -18,5 +18,12 @@ namespace Senai.WebApi.SpMedGroup.Interfaces {
         /// </summary>
         /// <returns>Uma lista com todos os medicos</returns>
         List<Medico> Listar();
+
+        /// <summary>
+        /// Mostra todas as informações do medico e de todas as suas consultas
+        /// </summary>
+        /// <param name="ID">Id do medico</param>
+        /// <returns>Retorna um medico e suas consultas</returns>
+        Medico VerConsultas(int ID);
     }
 }

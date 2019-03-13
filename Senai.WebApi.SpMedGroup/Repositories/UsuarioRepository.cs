@@ -6,7 +6,7 @@ using Senai.WebApi.SpMedGroup.Interfaces;
 
 namespace Senai.WebApi.SpMedGroup.Repositories {
     /// <summary>
-    /// Classe responsavel por cadastrar e listar Usuarios (independente de serm administradores , medicos ou pacientes) usando SqlClient
+    /// Classe responsavel por cadastrar e listar Usuarios (independente de serem administradores , medicos ou pacientes) usando SqlClient
     /// </summary>
     public class UsuarioRepository : IUsuarioRepository {
 
@@ -63,15 +63,47 @@ namespace Senai.WebApi.SpMedGroup.Repositories {
             throw new Exception("Não há Usuarios cadastrados no banco de dados");
         }
 
+        /// <summary>
+        /// Procura um usuario que tenha o ID selecionado
+        /// </summary>
+        /// <param name="ID">Chave primaria , ID do usuario a ser procurado</param>
+        /// <returns>Retorna o usuario no ID selecionado , se ele não existir joga uma exceção</returns>
         public Usuario Listar(int ID) {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(Database)) {
+                connection.Open();
+
+                string Comando = "SELECT * FROM Usuario WHERE ID = @ID";
+
+                SqlCommand cmd = new SqlCommand(Comando, connection);
+                cmd.Parameters.AddWithValue("@ID", ID);
+
+                SqlDataReader leitor = cmd.ExecuteReader();
+
+                if (leitor.HasRows) {
+                    while (leitor.Read()) {
+                        return new Usuario() {
+                            Id = Convert.ToInt32(leitor["ID"]),
+                            Email = leitor["EMAIL"].ToString(),
+                            Senha = leitor["SENHA"].ToString(),
+                            TipoUsuario = (Enums.EnTipoUsuario)Convert.ToInt32(leitor["TIPO_USUARIO"])
+                        };
+                    }
+                }
+            }
+            throw new NullReferenceException("Não existe usuario com o ID selecionado"); 
         }
 
+        /// <summary>
+        /// Procura um usuario no banco de dados que tenha a combinação de Email e Senha
+        /// </summary>
+        /// <param name="Email">Email do Usuario a ser procurado</param>
+        /// <param name="Senha">Senha do Usuario a ser procurado</param>
+        /// <returns>Um usuario com todas as informações retorna null</returns>
         public Usuario Logar(string Email, string Senha) {
             using (SqlConnection connection = new SqlConnection(Database)) {
                 connection.Open();
 
-                string Comando = "SELECT * FROM VerUsuarios WHERE EMAIL = @EMAIL AND SENHA = @SENHA";
+                string Comando = "SELECT * FROM Usuario WHERE EMAIL = @EMAIL AND SENHA = @SENHA";
 
                 SqlCommand cmd = new SqlCommand(Comando, connection);
                 cmd.Parameters.AddWithValue("@EMAIL",Email);

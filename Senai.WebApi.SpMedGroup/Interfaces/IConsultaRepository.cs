@@ -24,19 +24,5 @@ namespace Senai.WebApi.SpMedGroup.Interfaces {
         /// </summary>
         /// <param name="consulta">Consulta com os valores ja alterados</param>
         void Alterar(Consulta consulta);
-
-        /// <summary>
-        /// Lista todas as consultas do medico selecionado
-        /// </summary>
-        /// <param name="ID">ID do medico</param>
-        /// <returns>Uma lista com todas as consultas do medico selecionado</returns>
-        List<Consulta> ListarMedico(int ID);
-
-        /// <summary>
-        /// Lista todas as consultas do paciente selecionado
-        /// </summary>
-        /// <param name="ID">ID do paciente</param>
-        /// <returns>Uma lista com todas as consultas do paciente selecionado</returns>
-        List<Consulta> ListarPaciente(int ID);
     }
 }

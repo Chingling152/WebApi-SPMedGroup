@@ -30,34 +30,6 @@ namespace Senai.WebApi.SpMedGroup.Controllers
             }
         }
 
-        [HttpGet("Pacientes/MinhasConsultas")]
-        [Authorize(Roles = "Paciente")]
-        public IActionResult ListarPaciente() {
-            try {
-                int ID = Convert.ToInt32(//convertendo o valor inserido no token para int
-                    HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value//value retorna uma string
-                    // First procura o primeiro valor na array que contenha uma determinada especificação
-                    // nesse caso, é a Claim que é do tipo Jti
-                 );
-                return Ok(Repositorio.ListarPaciente(ID));
-            } catch (Exception exc) {
-                return BadRequest(exc.Message);
-            }
-        }
-
-        [HttpGet("Medicos/MinhasConsultas")]
-        [Authorize(Roles = "Medico")]
-        public IActionResult ListarMedico() {
-            try {
-                int ID = Convert.ToInt32(
-                    HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value
-                );
-                return Ok(Repositorio.ListarMedico(ID));
-            } catch (Exception exc) {
-                return BadRequest(exc.Message);
-            }
-        }
-
         [HttpPost]
         [Route("Cadastrar")]
         [Authorize(Roles = "Administrador,Medico")]

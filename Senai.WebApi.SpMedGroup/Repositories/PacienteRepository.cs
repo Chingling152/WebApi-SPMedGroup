@@ -18,5 +18,9 @@ namespace Senai.WebApi.SpMedGroup.Repositories {
         public List<Paciente> Listar() {
             throw new System.NotImplementedException();
         }
+
+        public Paciente VerConsultas(int ID) {
+            throw new System.NotImplementedException();
+        }
     }
 }

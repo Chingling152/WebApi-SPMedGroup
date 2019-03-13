@@ -21,5 +21,11 @@ namespace Senai.WebApi.SpMedGroup.Interfaces {
         /// </summary>
         /// <param name="paciente">Paciente com os valores ja alterados</param>
         void Alterar(Paciente paciente);
+        /// <summary>
+        /// Mostra todas as infornações do usuario e suas consultas
+        /// </summary>
+        /// <param name="ID">ID Do usuario</param>
+        /// <returns>Um usuario com todas as consultas relacionadas a ele</returns>
+        Paciente VerConsultas(int ID);
     }
 }
