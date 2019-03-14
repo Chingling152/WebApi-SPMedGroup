@@ -25,5 +25,13 @@ namespace Senai.WebApi.SpMedGroup.Interfaces {
         /// <param name="ID">Id do medico</param>
         /// <returns>Retorna um medico e suas consultas</returns>
         Medico VerConsultas(int ID);
+        /*
+        /// <summary>
+        /// Procura um medico com o CRM
+        /// </summary>
+        /// <param name="CRM"></param>
+        /// <returns></returns>
+        Medico Procurar(string CRM);
+        */
     }
 }

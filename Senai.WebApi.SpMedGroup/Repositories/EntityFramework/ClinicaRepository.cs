@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Senai.WebApi.SpMedGroup.Domains;
 using Senai.WebApi.SpMedGroup.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
     /// <summary>
@@ -24,6 +25,6 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
         /// Lista todas as clinicas do banco de dados
         /// </summary>
         /// <returns>Uma lista com todas as informações de todas as clinicas</returns>
-        public List<Clinica> Listar() => new SpMedGroupContext().Clinica.ToList();
+        public List<Clinica> Listar() => new SpMedGroupContext().Clinica.Include(i => i.Medico).ToList();
     }
 }

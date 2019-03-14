@@ -27,5 +27,13 @@ namespace Senai.WebApi.SpMedGroup.Interfaces {
         /// <param name="ID">ID Do usuario</param>
         /// <returns>Um usuario com todas as consultas relacionadas a ele</returns>
         Paciente VerConsultas(int ID);
+        /* Metodo nãi implementado
+        /// <summary>
+        /// Procura um usuario que tenha o CPF inserido
+        /// </summary>
+        /// <param name="CPF">CPF do usuario a ser procurado</param>
+        /// <returns>Retorna um usuario que tenha</returns>
+        Paciente Listar(string CPF);
+        */
     }
 }

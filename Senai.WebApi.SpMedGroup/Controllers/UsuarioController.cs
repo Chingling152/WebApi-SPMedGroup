@@ -18,9 +18,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
     {
         private readonly IUsuarioRepository Repositorio;
 
-        public UsuarioController() {
-            Repositorio = new UsuarioRepository();
-        }
+        public UsuarioController() => Repositorio = new UsuarioRepository();
 
         [HttpGet]
         [Authorize(Roles = "Administrador")]
@@ -57,7 +55,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
                 var claims = new[] {
                     new Claim(JwtRegisteredClaimNames.Email,user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti,user.Id.ToString()),
-                    new Claim(ClaimTypes.Role,user.TipoUsuario.ToString())
+                    new Claim(ClaimTypes.Role,user.TipoUsuario.ToString()),
                 };
 
                 var chave = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("Autenticação-SPMedGroup"));

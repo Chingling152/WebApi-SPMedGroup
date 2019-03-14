@@ -32,7 +32,8 @@ namespace Senai.WebApi.SpMedGroup.Controllers
 
         [HttpPost]
         [Route("Cadastrar")]
-        [Authorize(Roles = "Administrador,Medico")]
+        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Medico")]
         public IActionResult Cadastrar(Consulta consulta) {
             try {
                 Repositorio.Cadastrar(consulta);

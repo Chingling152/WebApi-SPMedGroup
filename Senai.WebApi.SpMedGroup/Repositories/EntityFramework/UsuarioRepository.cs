@@ -31,7 +31,7 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
         /// Seleciona um usuario no ID selecionado
         /// </summary>
         /// <param name="ID">ID do usuario a ser selecionado</param>
-        /// <returns>Um usuario, se não for encontrado , retorna uma Null</returns>
+        /// <returns>Um usuario, se não for encontrado , retorna Null</returns>
         public Usuario Listar(int ID) {
             Usuario usuario = new SpMedGroupContext().Usuario.Find(ID);
             if(usuario == null)
