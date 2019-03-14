@@ -98,8 +98,8 @@ Scaffold-DbContext **[String de conexão]** **[Tipo do banco de dados]** -Output
 **String de conexão** : A string que fará conexão com o banco de dados. O Unico comando que deve ser colocado entre aspas (") *Não é necessario colocar duas barras invertidas(\\) no endereço do banco de dados*  
 **Tipo do banco de dados** : Qual banco de dados será usado , Deve ser colocado a bibilioteca de referencia , Exemplo : SQLServer = **Microsoft.EntityFrameworkCore.SqlServer**.
 Então , caso queira usar outro banco de daos , você terá que importar a biblioteca que de suporte a ela.  
-** Pasta Domains** : Seria o nome onde ficariam todos os modelos , classes com os dados e variaveis já baseadas em cada tabela  
-** Pasta Contex** : Ficara os arquivos com as regras , tabelas e valores do banco de dados  
+**Pasta Domains** : Seria o nome onde ficariam todos os modelos , classes com os dados e variaveis já baseadas em cada tabela  
+**Pasta Contex** : Ficara os arquivos com as regras , tabelas e valores do banco de dados  
 **Arquivo Context** : O Arquivo onde tem em forma de objeto , uma tabela SQL com uma varias listas de Classes (classes que ficam na pasta **Domains**)  
   
 ### Mudando Repositorio  
@@ -137,11 +137,11 @@ Um **usuario não autenticado** não consegue ver nenhuma consulta de nenhum usu
 Visualizar usuarios é uma das **funções restritas** da API, ou seja, apenas alguem com privilegios de administrador pode acessar esses dados.  
 Nesse metodo há uma pequena diferença entre usar o **EntityFramework** e o **SqlClient**  
 #### Metodos de visualização  
-  - ##### Visualizar Todos os Usuarios **(Entity Framework)**  
+   - ##### Visualizar Todos os Usuarios **(Entity Framework)**  
   **Caminho :** *.../api/Consultas*  
   **Retorno :** Todas os Usuarios cadastrados no banco de dados  
   **Requer  :** Estar logado com privilegios de *Administrador*  
-  - ##### Visualizar Todos os Usuarios **(SqlClient)**  
+   - ##### Visualizar Todos os Usuarios **(SqlClient)**  
   **Caminho :** *.../api/Consultas*  
   **Retorno :** Todas os Usuarios cadastrados (Exceto administradores) no banco de dados  
   **Requer  :** Estar logado com privilegios de *Administrador*  
@@ -150,12 +150,12 @@ Nesse metodo há uma pequena diferença entre usar o **EntityFramework** e o **S
 - #### Visualizar Pacientes
 Visualizar pacientes é exatamente parecido com o [Visualizar Medicos](#Visualizar Medicos) e [Visualizar Pacientes](#Visualizar Pacientes), e só podem ser acessados por um Usuario autenticado que tenha privilegios de Administrador.  
 #### Metodos de visualização
-  - ##### Visualizar Todos os Pacientes  
+   - ##### Visualizar Todos os Pacientes  
   **Caminho :** *.../api/Paciente*  
   **Retorno :** Todas os Pacientes cadastrados no banco de dados  
   **Requer  :** Estar logado com privilegios de *Administrador*  
 
-  - ##### Visualizar Suas consultas  
+   - ##### Visualizar Suas consultas  
   **Caminho :** *.../api/Paciente/VerConsultas*  
   **Retorno :** Todas as consultas do paciente que estiver logado  
   **Requer  :** Estar Logado com privilegios de Paciente  
@@ -185,9 +185,9 @@ Visualizar clinicas é um metodo tambem exclusivo para o **Administrador** do si
   **Requer  :** Estar Logado com privilegios de Administrador  
   
   ### Cadastro
- Metodos de cadastro são usados para enviar dados ao banco de dados , eles possuem uma segurança superior ao de listagem , porque **qualquer valor invalido pode acabar prejudicando o banco de dados** (Veja [Validação:Campos](#Campos))  
+Metodos de cadastro são usados para enviar dados ao banco de dados , eles possuem uma segurança superior ao de listagem , porque **qualquer valor invalido pode acabar prejudicando o banco de dados** (Veja [Validação:Campos](#Campos))  
 Metodos de cadastro usam sempre o verbo **Post**  
 
 - #### Cadastrar Usuarios
- Este metodo **deve ser executado antes de criar um Medico ou Paciente** , porque ambos (Medicos e Pacientes) usam um Usuario cadastrado como referencia  
+Este metodo **deve ser executado antes de criar um Medico ou Paciente** , porque ambos (Medicos e Pacientes) usam um Usuario cadastrado como referencia  
  
