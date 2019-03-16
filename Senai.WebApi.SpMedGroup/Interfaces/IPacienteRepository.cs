@@ -17,6 +17,12 @@ namespace Senai.WebApi.SpMedGroup.Interfaces {
         /// <returns>Uma lista com todos os Pacientes</returns>
         List<Paciente> Listar();
         /// <summary>
+        /// Lista um Paciente no ID selecionado
+        /// </summary>
+        /// <param name="ID">ID do Paciente que será retornado</param>
+        /// <returns>Um Paciente com todas as informações completas</returns>
+        Paciente Listar(int ID);
+        /// <summary>
         /// Altera as informações do paciente
         /// </summary>
         /// <param name="paciente">Paciente com os valores ja alterados</param>
@@ -27,7 +33,7 @@ namespace Senai.WebApi.SpMedGroup.Interfaces {
         /// <param name="ID">ID Do usuario</param>
         /// <returns>Um usuario com todas as consultas relacionadas a ele</returns>
         Paciente VerConsultas(int ID);
-        /* Metodo nãi implementado
+        /* Metodo não implementado
         /// <summary>
         /// Procura um usuario que tenha o CPF inserido
         /// </summary>

@@ -20,6 +20,13 @@ namespace Senai.WebApi.SpMedGroup.Interfaces {
         List<Medico> Listar();
 
         /// <summary>
+        /// Lista um Medico no ID selecionado
+        /// </summary>
+        /// <param name="ID">ID do Medico que será retornado</param>
+        /// <returns>Um Medico com todas as informações completas</returns>
+        Medico Listar(int ID);
+
+        /// <summary>
         /// Mostra todas as informações do medico e de todas as suas consultas
         /// </summary>
         /// <param name="ID">Id do medico</param>

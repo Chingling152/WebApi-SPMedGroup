@@ -28,6 +28,20 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
         public List<Medico> Listar() => new SpMedGroupContext().Medico.Include(i=> i.IdEspecialidadeNavigation).ToList();
 
         /// <summary>
+        /// Procura um medico no ID selecionado no banco de dados
+        /// </summary>
+        /// <param name="ID">ID do medico</param>
+        /// <returns>Retorna um Medico e sua especialidade , ou uma excessão caso ele não exista</returns>
+        public Medico Listar(int ID) {
+            Medico medico = new SpMedGroupContext().Medico.Include(i => i.IdEspecialidadeNavigation).First(x => x.Id == ID);
+
+            if(medico == null)
+                throw new System.NullReferenceException($"Não existe medico no ID {ID}");
+
+            return medico;
+        }
+
+        /// <summary>
         /// Lista todas as consultas de um medico selecionado pelo ID
         /// </summary>
         /// <param name="ID">ID Do medico selecionado</param>

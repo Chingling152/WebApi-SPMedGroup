@@ -24,7 +24,7 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
         /// <summary>
         /// Cadastra um paciente no banco de dados
         /// </summary>
-        /// <param name="medico">Paciente a ser cadastrado</param>
+        /// <param name="paciente">Paciente a ser cadastrado</param>
         public void Cadastrar(Paciente paciente) {
             using (SpMedGroupContext ctx = new SpMedGroupContext()) {
                 ctx.Paciente.Add(paciente);
@@ -38,6 +38,25 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
         /// <returns>Uma lista com todos os pacientes</returns>
         public List<Paciente> Listar() => new SpMedGroupContext().Paciente.ToList();
 
+        /// <summary>
+        /// Retorna todas as informações de um paciente selecionado pelo ID
+        /// </summary>
+        /// <param name="ID">ID do paciente</param>
+        /// <returns>Retorna um paciente, ou null caso ele não exista</returns>
+        public Paciente Listar(int ID) {
+            Paciente paciente = new SpMedGroupContext().Paciente.Include(i => i.IdUsuarioNavigation).First(x => x.Id == ID);
+
+            if(paciente == null)
+                throw new System.NullReferenceException($"Não existe paciente no ID {ID}");
+
+            return paciente;
+        }
+
+        /// <summary>
+        /// Lista todas as consulta de um paciente selecionado pelo ID
+        /// </summary>
+        /// <param name="ID">ID do paciente selecionado</param>
+        /// <returns>Todas as consultas do paciente, ou uma exceção caso o Paciente não exista</returns>
         public Paciente VerConsultas(int ID) {
             Paciente paciente = new SpMedGroupContext().Paciente.Include(x => x.Consulta).ToList().Find(i => i.IdUsuario == ID);
 

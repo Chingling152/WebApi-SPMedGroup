@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Senai.WebApi.SpMedGroup.Domains;
 using Senai.WebApi.SpMedGroup.Interfaces;
-using Senai.WebApi.SpMedGroup.Repositories.EntityFramework;//remova o "EntityFramework" se quiser mudar para o modo normal
+using Senai.WebApi.SpMedGroup.Repositories;//remova o "EntityFramework" se quiser mudar para o modo normal
 
 namespace Senai.WebApi.SpMedGroup.Controllers
 {

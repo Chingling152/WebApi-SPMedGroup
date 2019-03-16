@@ -186,6 +186,7 @@ Visualizar clinicas é um metodo tambem exclusivo para o **Administrador** do si
   
   ### Cadastro
 Metodos de cadastro são usados para enviar dados ao banco de dados , eles possuem uma segurança superior ao de listagem , porque **qualquer valor invalido pode acabar prejudicando o banco de dados** (Veja [Validação:Campos](#Campos))  
+Só existe um metodo de cadastro para cada tipo de instancia  
 Metodos de cadastro usam sempre o verbo **Post**  
 
 - #### Cadastrar Usuarios

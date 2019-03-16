@@ -6,29 +6,32 @@ using Senai.WebApi.SpMedGroup.Interfaces;
 
 namespace Senai.WebApi.SpMedGroup.Repositories {
     /// <summary>
-    /// Classe responsavel por cadastrar e listar Usuarios (independente de serem administradores , medicos ou pacientes) usando SqlClient
+    /// Classe responsavel por logar e listar Usuarios (independente de serem administradores , medicos ou pacientes) e cadastrar administradores usando SqlClient
     /// </summary>
     public class UsuarioRepository : IUsuarioRepository {
 
         private const string Database = "Data Source = .\\MEUSERVIDOR; initial catalog = SENAI_SP_MEDGROUP;user id = sa ; pwd = 132";
 
         /// <summary>
-        /// Cadastra um usuario no banco de dados
+        /// Cadastra um administrador no banco de dados , qualquer outro tipo de usuario será negado
         /// </summary>
-        /// <param name="usuario">Usuario a ser cadastrado (ID não será cadastrado)</param>
+        /// <param name="usuario">Administrador a ser cadastrado (ID não será cadastrado)</param>
         public void Cadastrar(Usuario usuario) {
-            using (SqlConnection connection = new SqlConnection(Database)) {
-                connection.Open();
+            if (usuario.TipoUsuario.Equals(Enums.EnTipoUsuario.Administrador)) { 
+                using (SqlConnection connection = new SqlConnection(Database)) {
+                    connection.Open();
 
-                string Comando = "INSERT INTO Usuario(EMAIL,SENHA,TIPO_USUARIO) VALUES(@EMAIL,@SENHA,@TIPO_USUARIO);"; 
+                    string Comando = "INSERT INTO Usuario(EMAIL,SENHA,TIPO_USUARIO) VALUES(@EMAIL,@SENHA,@TIPO_USUARIO);"; 
 
-                SqlCommand cmd = new SqlCommand(Comando,connection);
-                cmd.Parameters.AddWithValue("@EMAIL",usuario.Email);
-                cmd.Parameters.AddWithValue("@SENHA", usuario.Senha);
-                cmd.Parameters.AddWithValue("@TIPO_USUARIO", usuario.TipoUsuario);
+                    SqlCommand cmd = new SqlCommand(Comando,connection);
+                    cmd.Parameters.AddWithValue("@EMAIL",usuario.Email);
+                    cmd.Parameters.AddWithValue("@SENHA", usuario.Senha);
+                    cmd.Parameters.AddWithValue("@TIPO_USUARIO", usuario.TipoUsuario);
 
-                cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
+                }
             }
+            throw new AccessViolationException("Você não pode cadastrar qualquer outro usuario alem de um administrador neste metodo");
         }
 
         /// <summary>
@@ -39,7 +42,7 @@ namespace Senai.WebApi.SpMedGroup.Repositories {
             using (SqlConnection connection = new SqlConnection(Database)) {
                 connection.Open();
 
-                string Comando = "SELECT * FROM Usuario WHERE TIPO_USUARIO != 100";
+                string Comando = "SELECT * FROM VerMedicos";
 
                 SqlCommand cmd = new SqlCommand(Comando,connection);
                 SqlDataReader leitor = cmd.ExecuteReader();
@@ -72,7 +75,7 @@ namespace Senai.WebApi.SpMedGroup.Repositories {
             using (SqlConnection connection = new SqlConnection(Database)) {
                 connection.Open();
 
-                string Comando = "SELECT * FROM Usuario WHERE ID = @ID";
+                string Comando = "SELECT * FROM VerMedicos WHERE ID = @ID";
 
                 SqlCommand cmd = new SqlCommand(Comando, connection);
                 cmd.Parameters.AddWithValue("@ID", ID);
