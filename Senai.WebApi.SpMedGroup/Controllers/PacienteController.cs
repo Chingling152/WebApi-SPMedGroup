@@ -21,7 +21,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Medico,Administrador")]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Listar() {
             try {
                 return Ok(Repositorio.Listar());
