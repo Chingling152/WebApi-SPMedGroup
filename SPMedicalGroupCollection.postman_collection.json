@@ -432,6 +432,16 @@
 				{
 					"name": "Cadastrar",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImp0aSI6IjAiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTUzMjc2NzgyLCJpc3MiOiJTUE1lZGljYWxHcm91cCIsImF1ZCI6IlNQTWVkaWNhbEdyb3VwIn0.xe4NtvLNcTOplu_8Rnfgf3sZ--tF3HXm4kJVUSmI7e0",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -443,7 +453,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": 0,\r\n  \"idUsuario\": 0,\r\n  \"nome\": \"string\",\r\n  \"cpf\": \"string\",\r\n  \"rg\": \"string\",\r\n  \"telefone\": \"string\",\r\n  \"dataNascimento\": \"string\"\r\n}"
+							"raw": "{\r\n  \"id\": 0,\r\n  \"idUsuario\": 0,\r\n  \"nome\": \"string\",\r\n  \"cpf\": \"string\",\r\n  \"rg\": \"string\",\r\n  \"telefone\": \"string\",\r\n  \"dataNascimento\": \"2001-07-23\",\r\n  \"idUsuarioNavigation\": {\r\n    \"id\": 0,\r\n    \"email\": \"string\",\r\n    \"senha\": \"string\",\r\n    \"tipoUsuario\": 1\r\n  }\r\n}"
 						},
 						"url": {
 							"raw": "http://localhost:5000/api/Paciente/Cadastrar",
@@ -460,7 +470,116 @@
 						},
 						"description": "Privilegio de Administrador"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Cadastrar (SqlClient)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 0,\r\n  \"idUsuario\": 0,\r\n  \"nome\": \"string\",\r\n  \"cpf\": \"string\",\r\n  \"rg\": \"string\",\r\n  \"telefone\": \"string\",\r\n  \"dataNascimento\": \"2001-07-23\",\r\n  \"idUsuarioNavigation\": {\r\n    \"id\": 0,\r\n    \"email\": \"string\",\r\n    \"senha\": \"string\",\r\n    \"tipoUsuario\": 1\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/Paciente/Cadastrar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Paciente",
+										"Cadastrar"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 22 Mar 2019 16:57:06 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Cadastrar (EntityFramework)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 0,\r\n  \"idUsuario\": 4,\r\n  \"nome\": \"Alexandre\",\r\n  \"cpf\": \"73556944057\",\r\n  \"rg\": \"326543457\",\r\n  \"telefone\": \"11987656543\",\r\n  \"dataNascimento\": \"2001-07-23\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/Paciente/Cadastrar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Paciente",
+										"Cadastrar"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 22 Mar 2019 16:47:13 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
 				},
 				{
 					"name": "Ver Consultas",
@@ -539,6 +658,16 @@
 				{
 					"name": "Cadastrar",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTUyMzE2MzMxLCJpc3MiOiJTUE1lZGljYWxHcm91cCIsImF1ZCI6IlNQTWVkaWNhbEdyb3VwIn0.ISSMuG0S0S80BYP7zNueaSvAcRrlDyz_JQM415JTB2E",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -550,7 +679,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 0,\n    \"idUsuario\": 0,\n    \"nome\": \"string\",\n    \"crm\": \"string\",\n    \"idClinica\": 0,\n    \"idEspecialidade\": 0\n}"
+							"raw": "{\n    \"id\": 0,\n    \"idUsuario\": 0,\n    \"nome\": \"string\",\n    \"crm\": \"string\",\n    \"idClinica\":0,\n    \"idEspecialidade\": 0\n}"
 						},
 						"url": {
 							"raw": "http://localhost:5000/api/Medico/Cadastrar",
@@ -566,7 +695,62 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Exemplo",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 0,\n    \"idUsuario\": 0,\n    \"nome\": \"string\",\n    \"crm\": \"string\",\n    \"idClinica\":0,\n    \"idEspecialidade\": 0\n}"
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/Medico/Cadastrar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Medico",
+										"Cadastrar"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 22 Mar 2019 19:01:42 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "WWW-Authenticate",
+									"value": "Bearer error=\"invalid_token\", error_description=\"The token is expired\""
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
 				}
 			]
 		},
@@ -613,14 +797,31 @@
 				{
 					"name": "Cadastrar",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTUzMjg0NjgwLCJpc3MiOiJTUE1lZGljYWxHcm91cCIsImF1ZCI6IlNQTWVkaWNhbEdyb3VwIn0.zLXjfl26J0WU8Bsvym8H8sBp4XVuEBKk6hz16DskAig",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\r\n  \"id\": 0,\r\n  \"idMedico\": 1,\r\n  \"idPaciente\": 1,\r\n  \"dataConsulta\": \"2019-03-22\",\r\n  \"descricao\": \"string\",\r\n  \"statusConsulta\": 1\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Cadastrar",
+							"raw": "http://localhost:5000/api/Consulta/Cadastrar",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -628,11 +829,67 @@
 							"port": "5000",
 							"path": [
 								"api",
+								"Consulta",
 								"Cadastrar"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Exemplo",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 0,\r\n  \"idMedico\": 1,\r\n  \"idPaciente\": 1,\r\n  \"dataConsulta\": \"2019-03-22\",\r\n  \"descricao\": \"string\",\r\n  \"statusConsulta\": 1\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/Consulta/Cadastrar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Consulta",
+										"Cadastrar"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 22 Mar 2019 18:58:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"idMedico\": 1,\n        \"idPaciente\": 1,\n        \"dataConsulta\": \"22-03-2019 12:00\",\n        \"descricao\": \"string\",\n        \"statusConsulta\": 1\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "Alterar",
@@ -679,7 +936,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTUyMzE2MzMxLCJpc3MiOiJTUE1lZGljYWxHcm91cCIsImF1ZCI6IlNQTWVkaWNhbEdyb3VwIn0.ISSMuG0S0S80BYP7zNueaSvAcRrlDyz_JQM415JTB2E",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTUzMjg0NjgwLCJpc3MiOiJTUE1lZGljYWxHcm91cCIsImF1ZCI6IlNQTWVkaWNhbEdyb3VwIn0.zLXjfl26J0WU8Bsvym8H8sBp4XVuEBKk6hz16DskAig",
 									"type": "string"
 								}
 							]
@@ -711,7 +968,62 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Exemplo",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 0,\n    \"nomeFantasia\": \"string\",\n    \"endereco\": \"string\",\n    \"numero\": 0,\n    \"cep\": \"string\",\n    \"razaoSocial\": \"string\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/Clinica/Cadastrar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Clinica",
+										"Cadastrar"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 22 Mar 2019 19:00:40 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
 				},
 				{
 					"name": "Listar Todas",

@@ -31,7 +31,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
         }
 
         [HttpGet("VerConsultas")]
-        [Authorize(Roles = "Paciente,Administrador")]
+        [Authorize(Roles = "Paciente")]
         public IActionResult VerConsultas() {
             try {
                 int ID = Convert.ToInt32(
