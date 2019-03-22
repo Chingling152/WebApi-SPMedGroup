@@ -8,22 +8,22 @@ Desenvolvida na escola SENAI de informatica para a empresa SP Medical Group , a 
    - 1.3. [Bibliotecas](#Bibliotecas)  
    
 - 2 **[Configurações iniciais](#Configurações-iniciais)**  
- - 2.1. [Criando banco de dados](#Criando-banco-de-dados)  
- - 2.2. [Criando o projeto](#Criando-o-projeto)  
- - 2.3. [Definindo relação com o banco](#Definindo-relação-com-o-banco)  
- - 2.4. [Mudando repositorio](#Mudando-Repositorio)  
- - 2.5. [Postman](#Postman)  
- - 2.6. [Swagger](#Swagger)  
+   - 2.1. [Criando banco de dados](#Criando-banco-de-dados)  
+   - 2.2. [Criando o projeto](#Criando-o-projeto)  
+   - 2.3. [Definindo relação com o banco](#Definindo-relação-com-o-banco)  
+   - 2.4. [Mudando repositorio](#Mudando-Repositorio)  
+   - 2.5. [Postman](#Postman)  
+   - 2.6. [Swagger](#Swagger)  
  
 - 3 **[Funcionalidades](#Funcionalidades)**  
- - 3.1. [Administrador](#Administrador)  
- - 3.2. [Medico](#Medico)  
- - 3.3. [Paciente](#Paciente)  
- - 3.4. [Usuario não autenticado](#Usuario-não-autenticado)  
+   - 3.1. [Administrador](#Administrador)  
+   - 3.2. [Medico](#Medico)  
+   - 3.3. [Paciente](#Paciente)  
+   - 3.4. [Usuario não autenticado](#Usuario-não-autenticado)  
   
 - 4 **[Validação](#Validação)**  
- - 4.1. - [Campos](#Campos)  
- - 4.2. - [Paginas](#Paginas)  
+   - 4.1. - [Campos](#Campos)  
+   - 4.2. - [Paginas](#Paginas)  
 
 ## Requisitos  
 A API tem alguns requisitos para que a mesma funcione e seja executada.  
