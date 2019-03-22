@@ -36,7 +36,7 @@ namespace Senai.WebApi.SpMedGroup.Repositories {
         public void Cadastrar(Especialidade especialidade) {
             using (SqlConnection Conexao = new SqlConnection(Database)) {
                 Conexao.Open();
-                string Comando = "INSERT INTO Especidalidade VALUES(@NOME)";
+                string Comando = "InserirEspecialidade @NOME";
 
                 SqlCommand cmd = new SqlCommand(Comando, Conexao);
                 cmd.Parameters.AddWithValue("@NOME",especialidade.Nome);

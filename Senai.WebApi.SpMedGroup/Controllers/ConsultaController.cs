@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Senai.WebApi.SpMedGroup.Domains;
 using Senai.WebApi.SpMedGroup.Interfaces;
-using Senai.WebApi.SpMedGroup.Repositories;
+using Senai.WebApi.SpMedGroup.Repositories.EntityFramework;
 
 namespace Senai.WebApi.SpMedGroup.Controllers {
     [ApiController]

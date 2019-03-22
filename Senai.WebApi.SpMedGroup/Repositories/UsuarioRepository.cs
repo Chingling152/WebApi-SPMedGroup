@@ -21,13 +21,13 @@ namespace Senai.WebApi.SpMedGroup.Repositories {
                 using (SqlConnection connection = new SqlConnection(Database)) {
                     connection.Open();
 
-                    string Comando = "INSERT INTO Usuario(EMAIL,SENHA,TIPO_USUARIO) VALUES(@EMAIL,@SENHA,@TIPO_USUARIO);"; 
+                    string Comando = "InserirAdmin @EMAIL,@SENHA,@TIPO_USUARIO;"; 
 
                     SqlCommand cmd = new SqlCommand(Comando,connection);
                     cmd.Parameters.AddWithValue("@EMAIL",usuario.Email);
                     cmd.Parameters.AddWithValue("@SENHA", usuario.Senha);
                     cmd.Parameters.AddWithValue("@TIPO_USUARIO", usuario.TipoUsuario);
-
+                    throw new Exception($"Cadastrou o usuario :\n{usuario.Email}\n{usuario.Senha}\n{usuario.TipoUsuario}");
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -42,7 +42,7 @@ namespace Senai.WebApi.SpMedGroup.Repositories {
             using (SqlConnection connection = new SqlConnection(Database)) {
                 connection.Open();
 
-                string Comando = "SELECT * FROM VerMedicos";
+                string Comando = "SELECT * FROM Usuario";
 
                 SqlCommand cmd = new SqlCommand(Comando,connection);
                 SqlDataReader leitor = cmd.ExecuteReader();
@@ -53,6 +53,7 @@ namespace Senai.WebApi.SpMedGroup.Repositories {
                     while (leitor.Read()) {
                         lista.Add(
                             new Usuario() {
+                                Id = Convert.ToInt32(leitor["ID"]),
                                 Email = leitor["EMAIL"].ToString(),
                                 Senha = leitor["SENHA"].ToString(),
                                 TipoUsuario = (Enums.EnTipoUsuario)Convert.ToInt32(leitor["TIPO_USUARIO"])

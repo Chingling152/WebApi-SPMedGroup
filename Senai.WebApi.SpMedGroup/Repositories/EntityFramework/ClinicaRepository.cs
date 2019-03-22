@@ -11,6 +11,17 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
     public class ClinicaRepository : IClinicaRepository {
 
         /// <summary>
+        /// Altera os valores de uma clinica no banco de dados (Procura a mesma pelo ID)
+        /// </summary>
+        /// <param name="clinica">Clinica com os valores ja alterados</param>
+        public void Alterar(Clinica clinica) {
+            using (SpMedGroupContext ctx = new SpMedGroupContext()) {
+                ctx.Clinica.Update(clinica);
+                ctx.SaveChanges();
+            }
+        }
+
+        /// <summary>
         /// Cadastra uma clinica no banco de dados
         /// </summary>
         /// <param name="clinica">Clinica a ser cadastrada</param>
