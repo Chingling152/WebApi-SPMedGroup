@@ -40,10 +40,10 @@ Desenvolvida na escola SENAI de informatica para a empresa SP Medical Group , a 
    - 4.2. - [Paginas](#Paginas)  
    
 - 5 **[Usando a API](#)**
-  - 5.1. [Usando o Postman](#)  
+  - 5.1. [Usando o Postman](#Usando-o-Postman)  
   - 5.2. [Autorização](#Autorização)  
   - 5.3. [Acessando Paginas](#Acessando-Paginas)  
-  - 5.4. [Exemplos do Postman](#Exemplos-do-Postman)
+  - 5.4. [Exemplos do Postman](#Exemplos-de-json)
 
 ## Requisitos  
 A API tem alguns requisitos para que a mesma funcione e seja executada.  
@@ -82,14 +82,18 @@ Se o seu banco de dados tiver as mesmas tabelas e colunas , você poderá apenas
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
  	if (!optionsBuilder.IsConfigured){
 	
- 		optionsBuilder.UseSqlServer("Data Source = .\\[NOME DO SEU SERVIDOR]; initial catalog = SENAI_SP_MEDGROUP;user id = sa ; pwd = 132");
+ 		optionsBuilder.UseSqlServer(
+		"Data Source = .\\[NOME DO SEU SERVIDOR]; initial catalog = SENAI_SP_MEDGROUP;user id = sa ; pwd = 132"
+		);
 		// No lugar de [NOMESERVIDOR] coloque o nome da sua instancia do SQL Server 
 		// initial catalog seria o banco de dados que ele irá iniciar usando
 		// user id é o seu usuario administrador do banco de dados
 		// pwd é a senha do usuario administrador 
 		//  Caso seu banco não precise de login para abrir utilize -> Integrated Security=SSPI 
 		// no lugar de user id = sa; pwd = 132
-		// Caso você esteja usando outro banco de dados (como oracle por exemplo) apenas mude o UseSqlServer par UseOracle (ah, e instale a biblioteca pra que funcione , não vou ter que te ensinar tudo né? ;-;)
+		// Caso você esteja usando outro banco de dados
+		//(como oracle por exemplo) apenas mude o UseSqlServer par UseOracle
+		//(ah, e instale a biblioteca pra que funcione , não vou ter que te ensinar tudo né? ;-;)
        }
 }
 ```
@@ -211,3 +215,18 @@ Cadastra um Usuario no banco de dados com privilegio de administrador, qualquer 
 **Parametros** : Um Usuario com todos os valores preenchidos (JSON)  
 
 ### Alteração  
+Os metodos de alteração, também usados pelo **administrador** onde os valores de registro do banco de dados são alterados. Esses metodos sempre são usados com um ID que será o ID do registro que será alterado.
+
+#### Alterar Usuarios  
+- **Entity framework**  
+Altera os valores de um usuario no banco de dados  
+- **SqlClient**  
+Altera os valores apenas de um *administrador*  
+
+**Caminho**: */api/Paciente/Alterar*  
+**Requisitos** : Estar logado com um usuario com privilegios de *Administrador*  
+**Parametros(Entity Framework)** : Um Usuario com os valores preenchidos e alterados (com o ID,em JSON)  
+**Parametros(SqlClient)** : Altera os valores de um administrador  
+
+#### Alterar Consultas
+Altera os valores de uma consulta no banco de dados (é usado pelo medico para alterar uma descrição)
