@@ -223,10 +223,41 @@ Altera os valores de um usuario no banco de dados
 - **SqlClient**  
 Altera os valores apenas de um *administrador*  
 
-**Caminho**: */api/Paciente/Alterar*  
+**Caminho**: */api/Usuario/Alterar*  
 **Requisitos** : Estar logado com um usuario com privilegios de *Administrador*  
 **Parametros(Entity Framework)** : Um Usuario com os valores preenchidos e alterados (com o ID,em JSON)  
 **Parametros(SqlClient)** : Altera os valores de um administrador  
 
-#### Alterar Consultas
-Altera os valores de uma consulta no banco de dados (é usado pelo medico para alterar uma descrição)
+#### Alterar Consultas  
+Altera os valores de uma consulta no banco de dados (é usado pelo medico para alterar uma descrição)  
+  
+**Caminho**: */api/Consulta/Alterar*  
+**Requisitos** : Estar logado com um usuario com privilegios de Administrador  
+**Parametros** : Uma consulta com todos os valores ja alterados (precisa do ID para saber qual registro será alterado)  
+
+#### Alterar Especialidades Medicas  
+Altera o nome de uma especialidade medica no banco de dados 
+**Caminho**: */api/Especialidade/Alterar*  
+**Requisitos** : Estar logado com um usuario com privilegios de Administrador  
+**Parametros** : Uma Especialidade com o nome ja alterado (precisa do ID para saber qual registro será alterado)  
+
+#### Alterar Medicos  
+- **Entity framework**  
+Altera os valores de um medicos no banco de dados (não afeta os dados de usuario)  
+- **SqlClient**  
+Altera **todos** os valores de um medico (desde os dados de medico até o de usuario como email e senha) **não muda o usuario de origem**  
+
+**Caminho**: */api/Medico/Alterar*  
+**Requisitos** : Estar logado com um usuario com privilegios de *Administrador* ou *Medico* (porém você poderá apenas alteras suas informações)  
+**Parametros(Entity Framework)** : Um Medico com o usuario dentro dele com os valores preenchidos e alterados (com o ID, o ID do Usuario deve ser o mesmo registrado no banco de dados)  
+**Parametros(SqlClient)** : Altera os valores de um administrador  
+#### Alterar Pacientes  
+- **Entity framework**  
+Altera os valores de um medicos no banco de dados (não afeta os dados de usuario)  
+- **SqlClient**  
+Altera **todos** os valores de um paciente (desde os dados de medico até o de usuario como email e senha)  
+
+**Caminho**: */api/Paciente/Alterar*  
+**Requisitos** :   
+**Parametros(Entity Framework)** :   
+**Parametros(SqlClient)** :   
