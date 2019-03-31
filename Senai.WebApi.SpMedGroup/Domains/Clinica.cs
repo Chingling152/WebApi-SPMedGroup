@@ -21,9 +21,10 @@ namespace Senai.WebApi.SpMedGroup.Domains
         [StringLength(maximumLength: 250, MinimumLength = 1, ErrorMessage = "O endereço inserido é muito grande")]
         public string Endereco { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Insira o nome numero da Clinica")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Insira o numero da Clinica")]
         public int Numero { get; set; }
 
+        [RegularExpression("^[0-9]*$", ErrorMessage = "O CEP deve conter apenas numeros")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "O CEP é obrigatorio")]
         [StringLength(maximumLength: 8, MinimumLength = 8, ErrorMessage = "O CEP precisa ter exatos 8 caracteres")]
         public string Cep { get; set; }

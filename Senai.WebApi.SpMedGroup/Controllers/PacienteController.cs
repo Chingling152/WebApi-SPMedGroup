@@ -51,6 +51,11 @@ namespace Senai.WebApi.SpMedGroup.Controllers
                 if(paciente.DataNascimento > DateTime.Now) {
                     throw new Exception("Data de nascimento invalida");
                 }
+                foreach (char i in paciente.Cpf){
+                    if(!char.IsDigit(i)) {
+                        throw new Exception("O CPF Deve conter apenas numeros");
+                    }
+                }
                 Repositorio.Cadastrar(paciente);
                 return Ok(Repositorio.Listar());
             } catch (Exception exc) {

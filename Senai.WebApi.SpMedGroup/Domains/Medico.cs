@@ -16,13 +16,14 @@ namespace Senai.WebApi.SpMedGroup.Domains
 
         [Required(AllowEmptyStrings = false,ErrorMessage ="O Nome do medico é obrigatorio")]
         [StringLength(maximumLength:200,MinimumLength =1,ErrorMessage ="O nome inserido é muito grande")]
+        [RegularExpression("^[a-zA-Z ç ~ ã õ ê â î ô ñ û ú í á é ó ü ï ä ö ë]+$", ErrorMessage = "O Nome deve conter apenas letras")]
         public string Nome { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "O medico precisa ter um CRM")]
         [StringLength(maximumLength: 7, MinimumLength = 7, ErrorMessage = "O CRM precisa ter 7 caracteres")]
         public string Crm { get; set; }
 
-        [Required(AllowEmptyStrings = false,ErrorMessage = "O Medico precisa trabalhar em uma clinica")]
+        [Required(AllowEmptyStrings = false,ErrorMessage = "O Medico precisa ter uma clinica")]
         public int IdClinica { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "O Medico precisa ter uma especialidade")]

@@ -35,15 +35,14 @@ Desenvolvida na escola SENAI de informatica para a empresa SP Medical Group , a 
 	  - 3.3.4. [Medicos](#Alterar-Medicos)  
 	  - 3.3.5. [Pacientes](#Alterar-Pacientes)  
   
-- 4 **[Validação](#Validação)**  
+- 4 **[Validação](#Validação-e-Autorização)**  
    - 4.1. - [Campos](#Campos)  
-   - 4.2. - [Paginas](#Paginas)  
+   - 4.2. - [Metodos](#Metodos)  
    
 - 5 **[Usando a API](#)**
-  - 5.1. [Usando o Postman](#)  
-  - 5.2. [Autorização](#Autorização)  
-  - 5.3. [Acessando Paginas](#Acessando-Paginas)  
-  - 5.4. [Exemplos do Postman](#Exemplos-do-Postman)
+  - 5.1. [Usando o Postman](#Usando-o-Postman)  
+  - 5.2. [Acessando Paginas](#Acessando-Paginas)  
+  - 5.3. [Exemplos do Postman](#Exemplos-de-json)
 
 ## Requisitos  
 A API tem alguns requisitos para que a mesma funcione e seja executada.  
@@ -82,14 +81,18 @@ Se o seu banco de dados tiver as mesmas tabelas e colunas , você poderá apenas
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
  	if (!optionsBuilder.IsConfigured){
 	
- 		optionsBuilder.UseSqlServer("Data Source = .\\[NOME DO SEU SERVIDOR]; initial catalog = SENAI_SP_MEDGROUP;user id = sa ; pwd = 132");
+ 		optionsBuilder.UseSqlServer(
+		"Data Source = .\\[NOME DO SEU SERVIDOR]; initial catalog = SENAI_SP_MEDGROUP;user id = sa ; pwd = 132"
+		);
 		// No lugar de [NOMESERVIDOR] coloque o nome da sua instancia do SQL Server 
 		// initial catalog seria o banco de dados que ele irá iniciar usando
 		// user id é o seu usuario administrador do banco de dados
 		// pwd é a senha do usuario administrador 
 		//  Caso seu banco não precise de login para abrir utilize -> Integrated Security=SSPI 
 		// no lugar de user id = sa; pwd = 132
-		// Caso você esteja usando outro banco de dados (como oracle por exemplo) apenas mude o UseSqlServer par UseOracle (ah, e instale a biblioteca pra que funcione , não vou ter que te ensinar tudo né? ;-;)
+		// Caso você esteja usando outro banco de dados
+		//(como oracle por exemplo) apenas mude o UseSqlServer par UseOracle
+		//(ah, e instale a biblioteca pra que funcione , não vou ter que te ensinar tudo né? ;-;)
        }
 }
 ```
@@ -211,3 +214,172 @@ Cadastra um Usuario no banco de dados com privilegio de administrador, qualquer 
 **Parametros** : Um Usuario com todos os valores preenchidos (JSON)  
 
 ### Alteração  
+Os metodos de alteração, também usados pelo **administrador** onde os valores de registro do banco de dados são alterados. Esses metodos sempre são usados com um ID que será o ID do registro que será alterado.
+
+#### Alterar Usuarios  
+- **Entity framework**  
+Altera os valores de um usuario no banco de dados  
+- **SqlClient**  
+Altera os valores apenas de um *administrador*  
+
+**Caminho**: */api/Usuario/Alterar*  
+**Requisitos** : Estar logado com um usuario com privilegios de *Administrador*  
+**Parametros(Entity Framework)** : Um Usuario com os valores preenchidos e alterados (com o ID,em JSON)  
+**Parametros(SqlClient)** : Altera os valores de um administrador  
+
+#### Alterar Consultas  
+Altera os valores de uma consulta no banco de dados (é usado pelo medico para alterar uma descrição)  
+  
+**Caminho**: */api/Consulta/Alterar*  
+**Requisitos** : Estar logado com um usuario com privilegios de Administrador  
+**Parametros** : Uma consulta com todos os valores ja alterados (precisa do ID para saber qual registro será alterado)  
+
+#### Alterar Especialidades Medicas  
+Altera o nome de uma especialidade medica no banco de dados 
+**Caminho**: */api/Especialidade/Alterar*  
+**Requisitos** : Estar logado com um usuario com privilegios de Administrador  
+**Parametros** : Uma Especialidade com o nome ja alterado (precisa do ID para saber qual registro será alterado)  
+
+#### Alterar Medicos  
+- **Entity framework**  
+Altera os valores de um medicos no banco de dados (não afeta os dados de usuario)  
+- **SqlClient**  
+Altera **todos** os valores de um medico (desde os dados de medico até o de usuario como email e senha) **não muda o usuario de origem**  
+
+**Caminho**: */api/Medico/Alterar*  
+**Requisitos** : Estar logado com um usuario com privilegios de *Administrador* ou *Medico* (porém você poderá apenas alteras suas informações)  
+**Parametros(Entity Framework)** : Um Medico com o usuario dentro dele com os valores preenchidos e alterados (com o ID, o ID do Usuario deve ser o mesmo registrado no banco de dados)  
+**Parametros(SqlClient)** : Altera os valores de um administrador  
+#### Alterar Pacientes  
+- **Entity framework**  
+Altera os valores de um medicos no banco de dados (não afeta os dados de usuario)  
+- **SqlClient**  
+Altera **todos** os valores de um paciente (desde os dados de medico até o de usuario como email e senha)  
+
+**Caminho**: */api/Paciente/Alterar*  
+**Requisitos** : Um usuario com privilegios de Administrador ou um Paciente (mas ele só poderá alterar seus valores)  
+**Parametros(Entity Framework)** :  Um paciente com um usuario dentro dele
+**Parametros(SqlClient)** :  
+
+## Validação e Autorização  
+Nem todos os metodos da API estão disponiveis para todos usarem, muitos desses metodos precisam de autenticação. Alem disso , metodos onde você precisa envia dados para o banco de dados tem os campos inseridos validados.  
+### Campos  
+Validação de campos da API apenas uma maneira de prevenir que nenhum dado sera inserido incorretamente no banco de dados.  
+A Maioria dos campos são requiridos e tem um certo tipo de dado a ser inserido (data, numerico , texto,email). Todos os valores devem ser inseridos (POST ou PUT) corretamente para que a API possa cadastrar ou alterar os dados  
+#### Geral  
+- **ID**  
+O ID de qualquer instancia **não é obrigatorio no caso de inserção**. Caso queira alterar algum registro , precisará informar o ID para que o banco de dados saiba qual registro deve alterar  
+
+#### Usuario  
+ - **Email** :  
+  - Letras , numeros e caracteres especiais  
+  - Não pode ser nulo  
+  - O Email ser valido  
+  - O Email não pode já estar cadastrado no banco de dados  
+  - Deve conter entre 5 e 200 caracteres  
+ - **Senha** :  
+   - Letras , numeros e caracteres especiais  
+   - Não pode ser nulo  
+   - Deve conter entre 8 e 200 caracteres  
+ - **Tipo de usuario**:
+	- Numero inteiro  
+	- Não pode ser nulo  
+	- Deve se referir à algum valor na enumeração [EnTipoUsuario](#)  
+	
+#### Paciente  
+ - **ID da conta**  
+   - Numero inteiro  
+   - Não pode ser nulo  
+   - O Numero deve se referir ao ID de algum registro de Usuarios no banco de dados  
+   - Não pode existir outro paciente referenciando esta mesma conta  
+ - **Nome**  
+    - Deve conter apenas letras  
+    - Deve conter no maximo 200 caracteres  
+    - Não pode ser nulo  
+ - **CPF**  
+   - Deve conter apenas numeros  
+   - Deve ter exatos 9 caracteres  
+   - Não pode existir um paciente cadastrado com este CPF  
+   - Não pode ser nulo  
+ - **RG**  
+  - Deve conter apenas numeros  
+  - Deve ter exatos 11 caracteres  
+  - Não pode existir outro paciente com este RG
+  - Não pode ser nulo  
+ - **Telefone**  
+  - Deve conter apenas numeros  
+  - Deve ter 10 ou 11 caracteres  
+  - Não pode ser nulo   
+ - **Data de nascimento**  
+  - Deve ser uma data valida (yyyy-MM-dd)  
+  - Não pode ser uma data futura  
+  - Não pode ser nula  
+   
+#### Medico  
+ - **ID da conta**  
+   - Numero inteiro  
+   - Não pode ser nulo  
+   - O Numero deve se referir ao ID de algum registro de Usuarios no banco de dados  
+   - Não pode existir outro medico referenciando esta mesma conta  
+ - **Nome**
+    - Deve conter apenas letras  
+    - Deve conter no maximo 200 caracteres  
+    - Não pode ser nulo  
+ - **Especialidade**  
+  - Deve ser um numero inteiro  
+  - Deve referenciar a um registro de uma Especialidade do banco de dados  
+  - Não pode ser nulo  
+ - **Clinica**  
+  - Deve ser um numero inteiro  
+  - Deve referenciar a um registro de uma Clinica do banco de dados  
+  - Não pode ser nulo  
+ - **CRM**  
+  - Deve conter apenas numeros  
+  - Deve ter exatos 11 caracteres  
+  - Deve ser unico , ou seja , não pode existir nenhum outro medico utilizando este CRM  
+  - Não pode ser nulo  
+  
+#### Clinica  
+ - **Nome Fantasia**
+  - Letras numeros e caracteres especiais são aceitos  
+  - Deve conter no maximo 200 caracteres  
+  - Não pode ser nulo  
+ - **Endereço**
+  - Letras numeros e caracteres especiais são aceitos  
+  - Deve conter no maximo 250 caracteres  
+  - Não pode ser nulo  
+ - **Numero**
+  - Apenas numeros são aceitos  
+  - Não pode ser nulo  
+ - **CEP**
+  - Apenas numeros são aceitos  
+  - Deve conter exatos 8 caracteres  
+  - Não pode ser nulo  
+ - ** Razão social**  
+  - Letras numeros e caracteres especiais são aceitos  
+  - Deve conter no maximo 200 caracteres  
+  - Não pode ser nulo  
+  - Deve ser unico , não pode existir qualquer outra Clinica com essa Razão social cadastrada no banco de dado  
+
+#### Consulta 
+- **ID Paciente**  
+  - Numero inteiro  
+  - Não pode ser nulo  
+  - O Numero deve referenciar um  ID de algum registro de um Paciente no banco de dados  
+- **ID Medico**  
+  - Numero inteiro  
+  - Não pode ser nulo  
+  - O Numero deve referenciar um  ID de algum registro de um Paciente no banco de dados  
+- **Data da consulta**  
+  - Deve ser uma data valida (yyyy-MM-dd hh:mm)  
+  - Não pode ser nula  
+- **Descrição**  
+ - Aceita letras , numeros caracteres especiais  
+ - Opcional  
+ - Sem limite de caracteres  
+- **Situação da consulta**
+ - Numero inteiro  
+ - Não pode ser nulo  
+ - Deve ser um valor que exista na Enumeração EnSituacaoConsulta  
+ 
+### Metodos
