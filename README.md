@@ -35,15 +35,14 @@ Desenvolvida na escola SENAI de informatica para a empresa SP Medical Group , a 
 	  - 3.3.4. [Medicos](#Alterar-Medicos)  
 	  - 3.3.5. [Pacientes](#Alterar-Pacientes)  
   
-- 4 **[Validação](#Validação)**  
+- 4 **[Validação](#Validação-e-Autorização)**  
    - 4.1. - [Campos](#Campos)  
-   - 4.2. - [Paginas](#Paginas)  
+   - 4.2. - [Metodos](#Metodos)  
    
 - 5 **[Usando a API](#)**
   - 5.1. [Usando o Postman](#Usando-o-Postman)  
-  - 5.2. [Autorização](#Autorização)  
-  - 5.3. [Acessando Paginas](#Acessando-Paginas)  
-  - 5.4. [Exemplos do Postman](#Exemplos-de-json)
+  - 5.2. [Acessando Paginas](#Acessando-Paginas)  
+  - 5.3. [Exemplos do Postman](#Exemplos-de-json)
 
 ## Requisitos  
 A API tem alguns requisitos para que a mesma funcione e seja executada.  
@@ -258,6 +257,14 @@ Altera os valores de um medicos no banco de dados (não afeta os dados de usuari
 Altera **todos** os valores de um paciente (desde os dados de medico até o de usuario como email e senha)  
 
 **Caminho**: */api/Paciente/Alterar*  
-**Requisitos** :   
-**Parametros(Entity Framework)** :   
-**Parametros(SqlClient)** :   
+**Requisitos** : Um usuario com privilegios de Administrador ou um Paciente (mas ele só poderá alterar seus valores)  
+**Parametros(Entity Framework)** :  Um paciente com um usuario dentro dele
+**Parametros(SqlClient)** :  
+
+## Validação e Autorização  
+Nem todos os metodos da API estão disponiveis para todos usarem, muitos desses metodos precisam de autenticação. Alem disso , metodos onde você precisa envia dados para o banco de dados tem os campos inseridos validados.  
+### Campos  
+Validação de campos da API apenas uma maneira de prevenir que nenhum dado sera inserido incorretamente no banco de dados.  
+A Maioria dos campos são requiridos e tem um certo tipo de dado a ser inserido (data, numerico , texto,email). Todos os valores devem ser inseridos (POST ou PUT) corretamente para que a API possa cadastrar ou alterar os dados  
+- **ID**  
+O ID de qualquer instancia não é obrigatorio **no caso de inserção**. Caso queira alterar algum registro , precisará informar o ID para que o banco de dados saiba qual registro deve alterar  
