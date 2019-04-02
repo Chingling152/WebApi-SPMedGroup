@@ -272,11 +272,11 @@ O ID de qualquer instancia **não é obrigatorio no caso de inserção**. Caso q
 
 #### Usuario  
  - **Email** :  
-  - Letras , numeros e caracteres especiais  
-  - Não pode ser nulo  
-  - O Email ser valido  
-  - O Email não pode já estar cadastrado no banco de dados  
-  - Deve conter entre 5 e 200 caracteres  
+   - Letras , numeros e caracteres especiais  
+   - Não pode ser nulo  
+   - O Email ser valido  
+   - O Email não pode já estar cadastrado no banco de dados  
+   - Deve conter entre 5 e 200 caracteres  
  - **Senha** :  
    - Letras , numeros e caracteres especiais  
    - Não pode ser nulo  
@@ -302,84 +302,84 @@ O ID de qualquer instancia **não é obrigatorio no caso de inserção**. Caso q
    - Não pode existir um paciente cadastrado com este CPF  
    - Não pode ser nulo  
  - **RG**  
-  - Deve conter apenas numeros  
-  - Deve ter exatos 11 caracteres  
-  - Não pode existir outro paciente com este RG
-  - Não pode ser nulo  
+   - Deve conter apenas numeros  
+   - Deve ter exatos 11 caracteres  
+   - Não pode existir outro paciente com este RG
+   - Não pode ser nulo  
  - **Telefone**  
-  - Deve conter apenas numeros  
-  - Deve ter 10 ou 11 caracteres  
-  - Não pode ser nulo   
+   - Deve conter apenas numeros  
+   - Deve ter 10 ou 11 caracteres  
+   - Não pode ser nulo   
  - **Data de nascimento**  
-  - Deve ser uma data valida (yyyy-MM-dd)  
-  - Não pode ser uma data futura  
-  - Não pode ser nula  
+   - Deve ser uma data valida (yyyy-MM-dd)  
+   - Não pode ser uma data futura  
+   - Não pode ser nula  
    
 #### Medico  
  - **ID da conta**  
-   - Numero inteiro  
-   - Não pode ser nulo  
-   - O Numero deve se referir ao ID de algum registro de Usuarios no banco de dados  
-   - Não pode existir outro medico referenciando esta mesma conta  
+    - Numero inteiro  
+    - Não pode ser nulo  
+    - O Numero deve se referir ao ID de algum registro de Usuarios no banco de dados  
+    - Não pode existir outro medico referenciando esta mesma conta  
  - **Nome**
     - Deve conter apenas letras  
     - Deve conter no maximo 200 caracteres  
     - Não pode ser nulo  
  - **Especialidade**  
-  - Deve ser um numero inteiro  
-  - Deve referenciar a um registro de uma Especialidade do banco de dados  
-  - Não pode ser nulo  
+   - Deve ser um numero inteiro  
+   - Deve referenciar a um registro de uma Especialidade do banco de dados  
+   - Não pode ser nulo  
  - **Clinica**  
-  - Deve ser um numero inteiro  
-  - Deve referenciar a um registro de uma Clinica do banco de dados  
-  - Não pode ser nulo  
+   - Deve ser um numero inteiro  
+   - Deve referenciar a um registro de uma Clinica do banco de dados  
+   - Não pode ser nulo  
  - **CRM**  
-  - Deve conter apenas numeros  
-  - Deve ter exatos 11 caracteres  
-  - Deve ser unico , ou seja , não pode existir nenhum outro medico utilizando este CRM  
-  - Não pode ser nulo  
+   - Deve conter apenas numeros  
+   - Deve ter exatos 11 caracteres  
+   - Deve ser unico , ou seja , não pode existir nenhum outro medico utilizando este CRM  
+   - Não pode ser nulo  
   
 #### Clinica  
  - **Nome Fantasia**
-  - Letras numeros e caracteres especiais são aceitos  
-  - Deve conter no maximo 200 caracteres  
-  - Não pode ser nulo  
+   - Letras numeros e caracteres especiais são aceitos  
+   - Deve conter no maximo 200 caracteres  
+   - Não pode ser nulo  
  - **Endereço**
-  - Letras numeros e caracteres especiais são aceitos  
-  - Deve conter no maximo 250 caracteres  
-  - Não pode ser nulo  
+   - Letras numeros e caracteres especiais são aceitos  
+   - Deve conter no maximo 250 caracteres  
+   - Não pode ser nulo  
  - **Numero**
-  - Apenas numeros são aceitos  
-  - Não pode ser nulo  
+   - Apenas numeros são aceitos  
+   - Não pode ser nulo  
  - **CEP**
-  - Apenas numeros são aceitos  
-  - Deve conter exatos 8 caracteres  
-  - Não pode ser nulo  
+   - Apenas numeros são aceitos  
+   - Deve conter exatos 8 caracteres  
+   - Não pode ser nulo  
  - ** Razão social**  
-  - Letras numeros e caracteres especiais são aceitos  
-  - Deve conter no maximo 200 caracteres  
-  - Não pode ser nulo  
-  - Deve ser unico , não pode existir qualquer outra Clinica com essa Razão social cadastrada no banco de dado  
+   - Letras numeros e caracteres especiais são aceitos  
+   - Deve conter no maximo 200 caracteres  
+   - Não pode ser nulo  
+   - Deve ser unico , não pode existir qualquer outra Clinica com essa Razão social cadastrada no banco de dado  
 
 #### Consulta 
 - **ID Paciente**  
-  - Numero inteiro  
-  - Não pode ser nulo  
-  - O Numero deve referenciar um  ID de algum registro de um Paciente no banco de dados  
+   - Numero inteiro  
+   - Não pode ser nulo  
+   - O Numero deve referenciar um  ID de algum registro de um Paciente no banco de dados  
 - **ID Medico**  
-  - Numero inteiro  
-  - Não pode ser nulo  
-  - O Numero deve referenciar um  ID de algum registro de um Paciente no banco de dados  
+   - Numero inteiro  
+   - Não pode ser nulo  
+   - O Numero deve referenciar um  ID de algum registro de um Paciente no banco de dados  
 - **Data da consulta**  
-  - Deve ser uma data valida (yyyy-MM-dd hh:mm)  
-  - Não pode ser nula  
+   - Deve ser uma data valida (yyyy-MM-dd hh:mm)  
+   - Não pode ser nula  
 - **Descrição**  
- - Aceita letras , numeros caracteres especiais  
- - Opcional  
- - Sem limite de caracteres  
+   - Aceita letras , numeros caracteres especiais  
+   - Opcional  
+   - Sem limite de caracteres  
 - **Situação da consulta**
- - Numero inteiro  
- - Não pode ser nulo  
- - Deve ser um valor que exista na Enumeração EnSituacaoConsulta  
+   - Numero inteiro  
+   - Não pode ser nulo  
+   - Deve ser um valor que exista na Enumeração EnSituacaoConsulta  
  
 ### Metodos
