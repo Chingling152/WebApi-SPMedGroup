@@ -17,6 +17,12 @@ namespace Senai.WebApi.SpMedGroup.Interfaces {
         /// <returns>Uma lista com todas as clinicas cadastradas</returns>
         List<Clinica> Listar();
         /// <summary>
+        /// Lista uma clinica cadastrada com o ID selecionado
+        /// </summary>
+        /// <param name="ID">ID da clinica selecionada</param>
+        /// <returns>Todas as informações de uma clinica</returns>
+        Clinica Listar(int ID);
+        /// <summary>
         /// Altera os valores de uma clinica no banco de dados
         /// </summary>
         /// <param name="clinica">Clinica com os valores ja alterado</param>

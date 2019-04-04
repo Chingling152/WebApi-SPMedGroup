@@ -1,4 +1,4 @@
-# SP Medical Group (API)  
+# SP Medical Group (API V.2)  
 Desenvolvida na escola SENAI de informatica para a empresa SP Medical Group , a API tem o objetivo de facilitar o agendamento e visualização de consultas  
 # Sumario
 
@@ -10,10 +10,9 @@ Desenvolvida na escola SENAI de informatica para a empresa SP Medical Group , a 
 - 2 **[Configurações iniciais](#Configurações-iniciais)**  
    - 2.1. [Criando banco de dados](#Criando-banco-de-dados)  
    - 2.2. [Criando o projeto](#Criando-o-projeto)  
-   - 2.3. [Definindo relação com o banco](#Definindo-relação-com-o-banco)  
-   - 2.4. [Mudando repositorio](#Mudando-Repositorio)  
-   - 2.5. [Postman](#Postman)  
-   - 2.6. [Swagger](#Swagger)  
+   - 2.3. [Definindo relação com o banco](#Definindo-relação-com-o-banco)   
+   - 2.4. [Postman](#Postman)  
+   - 2.5. [Swagger](#Swagger)  
  
 - 3 **[Funcionalidades](#Funcionalidades)**  
    - 3.1. [Visualização](#Visualização)  
@@ -22,18 +21,20 @@ Desenvolvida na escola SENAI de informatica para a empresa SP Medical Group , a 
 	  - 3.1.3. [Medicos](#Visualizar-Todos-os-Medicos)  
 	  - 3.1.4. [Pacientes](#Visualizar-Todos-os-Pacientes)  
 	  - 3.1.5. [Usuarios](#Visualizar-Todos-os-Usuarios)  
-   - 3.2. [Cadastro](#Cadastro)  
-	  - 3.2.1. [Consultas](#Cadastrar-Consultas)  
-	  - 3.2.2. [Especialidades](#Cadastrar-Especialidades-Medicas)  
-	  - 3.2.3. [Medicos](#Cadastrar-Medicos)  
-	  - 3.2.4. [Pacientes](#Cadastrar-Pacientes)  
-      - 3.2.5. [Usuarios](#Cadastrar-Usuarios)  
-   - 3.3. [Alteração](#Alteração)  
-	  - 3.3.1. [Usuarios](#Alterar-Usuarios)  
-	  - 3.3.2. [Consultas](#Alterar-Consultas)  
-	  - 3.3.3. [Especialidades](#Alterar-Especialidades-Medicas)  
-	  - 3.3.4. [Medicos](#Alterar-Medicos)  
-	  - 3.3.5. [Pacientes](#Alterar-Pacientes)  
+  - 3.2. [Filtragem](#Filtragem)  
+    - 3.2.1. []()  
+   - 3.3. [Cadastro](#Cadastro)  
+	  - 3.3.1. [Consultas](#Cadastrar-Consultas)  
+	  - 3.3.2. [Especialidades](#Cadastrar-Especialidades-Medicas)  
+	  - 3.3.3. [Medicos](#Cadastrar-Medicos)  
+	  - 3.3.4. [Pacientes](#Cadastrar-Pacientes)  
+    - 3.3.5. [Usuarios](#Cadastrar-Usuarios)  
+   - 3.4. [Alteração](#Alteração)  
+	  - 3.4.1. [Usuarios](#Alterar-Usuarios)  
+	  - 3.4.2. [Consultas](#Alterar-Consultas)  
+	  - 3.4.3. [Especialidades](#Alterar-Especialidades-Medicas)  
+	  - 3.4.4. [Medicos](#Alterar-Medicos)  
+	  - 3.4.5. [Pacientes](#Alterar-Pacientes)  
   
 - 4 **[Validação](#Validação-e-Autorização)**  
    - 4.1. - [Campos](#Campos)  
@@ -107,14 +108,6 @@ Então , caso queira usar outro banco de daos , você terá que importar a bibli
 **Pasta Contex** : Ficara os arquivos com as regras , tabelas e valores do banco de dados  
 **Arquivo Context** : O Arquivo onde tem em forma de objeto , uma tabela SQL com uma varias listas de Classes (classes que ficam na pasta **Domains**)  
   
-### Mudando Repositorio  
-A API Tem uma segunda maneira de se conectar ao banco de dados, utilizando SqlClient. Há algumas diferenças na performace mas eu não vou ficar falando sobre isso.   
-Para mudar o repositorio apenas vá no topo de cada script e mude a seguinte parte.  
-``` csharp
-// Usando entity framework (padrão)
-using Senai.WebApi.SpMedGroup.Repositories.EntityFramework;
-// Apague o .EntityFramework para mudar do EntityFramework para o SqlClient
-// As classes possuem o mesmo nome e herdam das mesmas interfaces
 ```
 ### Postman
 O Postman é usado para testar todos os metodos e paginas da aplicação, lá tera todos os metodos.  
@@ -128,20 +121,17 @@ As funcionalidades da API são divididas em 3 : funcionalidades de **inserção*
 
 ### Visualização  
 Os metodos de visualização são metodos onde retornam valores salvos no banco de dados ao usuario.  
-**Alguns metodos de visualização tem retornos diferentes** (depende do que você está usando, SQLClient ou EntityFramework)  
  
 - #### Visualizar Todas as Consultas   
 **Caminho**: */api/Consulta*  
 **Requisitos** : Estar logado com um usuario com privilegios de administrador  
-**Retorno(Entity Framework)** : Todas as consultas cadastradas no banco de dados  
-**Retorno(SqlClient)** : Todas as consultas cadastradas no banco de dados (com as informações dos pacientes e medicos)  
+**Retorno** : Todas as consultas cadastradas no banco de dados  
 
 - #### Visualizar Suas Consultas  
 **Caminho(Medico)**: */api/Medico/VerConsultas*  
 **Caminho(Paciente)**: */api/Paciente/VerConsultas*  
 **Requisitos** : Estar logado com um usuario com privilegios de medico ou Paciente  
-**Retorno(Entity Framework)** : Todas as consultas feitas pelo Medico/Paciente  
-**Retorno(SqlClient)** : Todas as informações de todas as consultas feitas pelo Medico/Paciente   
+**Retorno** : Todas as consultas feitas pelo Medico/Paciente  
 
 - #### Visualizar Todas as Especialidades Medicas  
 **Caminho**: */api/Especialidade*  
@@ -151,8 +141,7 @@ Os metodos de visualização são metodos onde retornam valores salvos no banco 
 - #### Visualizar Todos os Medicos  
 **Caminho**: */api/Medico*  
 **Requisitos** : Estar logado com um usuario com privilegios de administrador  
-**Retorno(Entity Framework)** : Todas as informações de todos os medicos  
-**Retorno(SqlClient)** : Todas as informações dos medicos (porém um pouco mais precisas)  
+**Retorno** : Todas as informações de todos os medicos   
 
 - #### Visualizar Todos os Pacientes  
 **Caminho**: */api/Paciente*
@@ -164,8 +153,10 @@ Os metodos de visualização são metodos onde retornam valores salvos no banco 
  **Requisitos** : Estar logado com um usuario com privilegios de administrador  
  **Retorno** : Todos os usuarios cadastrados no banco de dados  
 
+### Filtragem
+Uma das novas 
 ### Cadastro
-Metodos de cadastro são metodos onde o usuario (geralmente com privilegios de administrador) insere registros no banco de dados. **Esses metodos devem ser usado com cuidado** (principalmente se estiver usando SQLClient) ja que **são dados que ficarão salvos para sempre no banco de dados** (não há metodos para excluir dados ainda) e nem todos os erros foram tratados ainda.  
+Metodos de cadastro são metodos onde o usuario (geralmente com privilegios de administrador) insere registros no banco de dados. **Esses metodos devem ser usado com cuidado** ja que **são dados que ficarão salvos para sempre no banco de dados** (não há metodos para excluir dados ainda) e nem todos os erros foram tratados ainda.  
 Para cadastrar ou alterar veja [Usando a API/Cadastrando Dados](#).  
   
 #### Cadastrar Consultas  
@@ -183,31 +174,20 @@ Cadastra uma especialidade medica no banco de dados
 **Parametros** : Uma especialidade medica com os valores preenchidos (JSON)  
 
 #### Cadastrar Medicos  
-- **Entity framework**  
 Cadastra um Medico no banco de dados   
-- **SqlClient**  
-Cadastra um Medico e um Usuario para o Medico no banco de dados  
   
 **Caminho**: */api/Medico/Cadastrar*  
 **Requisitos** : Estar logado com um usuario com privilegios de Administrador  
-**Parametros(Entity Framework)** : Um medico com os valores preenchidos (JSON)  
-**Parametros(SqlClient)** : Um medico com os valores preenchidos e um Usuario dentro dele (Veja :  [Exemplos do Postman](#Exemplos-do-Postman))  
+**Parametros** : Um medico com os valores preenchidos (JSON)  
 
 #### Cadastrar Pacientes  
-- **Entity framework**  
 Cadastra um Paciente no banco de dados   
-- **SqlClient**  
-Cadastra um Paciente e um Usuario para o Paciente no banco de dados  
 **Caminho**: */api/Paciente/Cadastrar*  
 **Requisitos** : Estar logado com um usuario com privilegios de Administrador  
-**Parametros(Entity Framework)** : Um Paciente com os valores preenchidos (JSON)  
-**Parametros(SqlClient)** : Um Paciente com os valores preenchidos e um Usuario dentro dele (Veja :  [Exemplos do Postman](#Exemplos-do-Postman))  
+**Parametros** : Um Paciente com os valores preenchidos (JSON)  
   
 #### Cadastrar Usuarios  
-- **Entity Framework**
 Cadastra um Usuario no banco de dados. Que será usado como referencia nos metodos Cadastrar Paciente e/ou Cadastrar Medico atraves do ID  
-- **SqlClient**
-Cadastra um Usuario no banco de dados com privilegio de administrador, qualquer outro tipo de usuario inserido irá retornar uma exceção  
   
 **Caminho**: */api/Usuario/Cadastrar*  
 **Requisitos** : Estar logado com um usuario com privilegios de Administrador  
@@ -217,15 +197,12 @@ Cadastra um Usuario no banco de dados com privilegio de administrador, qualquer 
 Os metodos de alteração, também usados pelo **administrador** onde os valores de registro do banco de dados são alterados. Esses metodos sempre são usados com um ID que será o ID do registro que será alterado.
 
 #### Alterar Usuarios  
-- **Entity framework**  
 Altera os valores de um usuario no banco de dados  
-- **SqlClient**  
-Altera os valores apenas de um *administrador*  
 
 **Caminho**: */api/Usuario/Alterar*  
 **Requisitos** : Estar logado com um usuario com privilegios de *Administrador*  
-**Parametros(Entity Framework)** : Um Usuario com os valores preenchidos e alterados (com o ID,em JSON)  
-**Parametros(SqlClient)** : Altera os valores de um administrador  
+**Parametros** : Um Usuario com os valores preenchidos e alterados (com o ID,em JSON)  
+
 
 #### Alterar Consultas  
 Altera os valores de uma consulta no banco de dados (é usado pelo medico para alterar uma descrição)  
@@ -241,25 +218,17 @@ Altera o nome de uma especialidade medica no banco de dados
 **Parametros** : Uma Especialidade com o nome ja alterado (precisa do ID para saber qual registro será alterado)  
 
 #### Alterar Medicos  
-- **Entity framework**  
 Altera os valores de um medicos no banco de dados (não afeta os dados de usuario)  
-- **SqlClient**  
-Altera **todos** os valores de um medico (desde os dados de medico até o de usuario como email e senha) **não muda o usuario de origem**  
 
 **Caminho**: */api/Medico/Alterar*  
 **Requisitos** : Estar logado com um usuario com privilegios de *Administrador* ou *Medico* (porém você poderá apenas alteras suas informações)  
-**Parametros(Entity Framework)** : Um Medico com o usuario dentro dele com os valores preenchidos e alterados (com o ID, o ID do Usuario deve ser o mesmo registrado no banco de dados)  
-**Parametros(SqlClient)** : Altera os valores de um administrador  
+**Parametros** : Um Medico com o usuario dentro dele com os valores preenchidos e alterados (com o ID, o ID do Usuario deve ser o mesmo registrado no banco de dados)  
 #### Alterar Pacientes  
-- **Entity framework**  
 Altera os valores de um medicos no banco de dados (não afeta os dados de usuario)  
-- **SqlClient**  
-Altera **todos** os valores de um paciente (desde os dados de medico até o de usuario como email e senha)  
 
 **Caminho**: */api/Paciente/Alterar*  
 **Requisitos** : Um usuario com privilegios de Administrador ou um Paciente (mas ele só poderá alterar seus valores)  
-**Parametros(Entity Framework)** :  Um paciente com um usuario dentro dele
-**Parametros(SqlClient)** :  
+**Parametros** :  Um paciente com um usuario dentro dele
 
 ## Validação e Autorização  
 Nem todos os metodos da API estão disponiveis para todos usarem, muitos desses metodos precisam de autenticação. Alem disso , metodos onde você precisa envia dados para o banco de dados tem os campos inseridos validados.  

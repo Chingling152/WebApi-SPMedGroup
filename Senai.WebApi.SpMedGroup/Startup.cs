@@ -50,7 +50,7 @@ namespace Senai.WebApi.SpMedGroup {
 
             services.AddSwaggerGen(
                 i => i.SwaggerDoc("v1",new Info(){
-                        Title = "SP Medical Group", Version = "v1"
+                        Title = "SP Medical Group", Version = "v2"
                     }
                 )
             );
@@ -65,7 +65,7 @@ namespace Senai.WebApi.SpMedGroup {
             app.UseSwagger();// usa o swagger (cria o arquivo swagger.json que é usado no comando a seguir)
 
             app.UseSwaggerUI(c => {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SP Medical Group");
+                c.SwaggerEndpoint("/swagger/v2/swagger.json", "SP Medical Group");
                 }
             );//usa o arquivo swagger.json e gera uma pagina de documentação
 

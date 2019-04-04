@@ -1,8 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using Senai.WebApi.SpMedGroup.Domains;
 using Senai.WebApi.SpMedGroup.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
     /// <summary>
@@ -36,6 +36,26 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
         /// Lista todas as clinicas do banco de dados
         /// </summary>
         /// <returns>Uma lista com todas as informações de todas as clinicas</returns>
-        public List<Clinica> Listar() => new SpMedGroupContext().Clinica.Include(i => i.Medico).ToList();
+        public List<Clinica> Listar(){
+            using (SpMedGroupContext ctx = new SpMedGroupContext()) {
+                if(ctx.Clinica.Count()>0)
+                    return ctx.Clinica.ToList();
+            } 
+            throw new Exception("Não há nenhuma clinica cadastrada no banco de dados");
+        }
+
+        /// <summary>
+        /// Lista todas as informações e medicos de uma clinica
+        /// </summary>
+        /// <param name="ID">ID da clinica selecionada</param>
+        /// <returns>Retorna todas as informações da clinica selecionada , se ela não existir , retorna ua exceção</returns>
+        public Clinica Listar(int ID) {
+            using (SpMedGroupContext ctx = new SpMedGroupContext()) {
+                Clinica clinica = ctx.Clinica.Find(ID);
+                if(clinica != null)
+                    return clinica;
+            }
+            throw new Exception($"Não há nenhuma clinica cadastrada no banco de dados com o id {ID}");
+        }
     }
 }

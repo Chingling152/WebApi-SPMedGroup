@@ -28,6 +28,16 @@ namespace Senai.WebApi.SpMedGroup.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        [Authorize(Roles = "Administrador")]
+        public IActionResult Listar(int id) {
+            try {
+                return Ok(Repositorio.Listar(id));
+            } catch (Exception exc) {
+                return BadRequest(exc.Message);
+            }
+        }
+
         [HttpPost]
         [Route("Cadastrar")]
         [Authorize(Roles = "Administrador")]

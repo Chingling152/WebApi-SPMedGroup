@@ -24,7 +24,7 @@ namespace Senai.WebApi.SpMedGroup.Domains
             if (!optionsBuilder.IsConfigured)
             {
                 //Mude o nome do servidor aqui
-                optionsBuilder.UseSqlServer("Data Source=.\\MEUSERVIDOR;Initial Catalog=SENAI_SP_MEDGROUP;User ID=sa;Password=132");
+                optionsBuilder.UseSqlServer("Data Source=.\\NOVOSERVIDOR;Initial Catalog=SENAI_SP_MEDGROUP;Integrated Security");
             }
         }
 
