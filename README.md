@@ -15,7 +15,7 @@ Desenvolvida na escola SENAI de informatica para a empresa SP Medical Group , a 
    - 2.5. [Postman](#Postman)  
    - 2.6. [Swagger](#Swagger)  
  
-- 3 **[Funcionalidades](#Funcionalidades)**  
+- 3 **[Endpoints](#Endpoints)**  
    - 3.1. [Visualização](#Visualização)  
 	  - 3.1.1. [Consultas](#Visualizar-Todas-as-Consultas)  
 	  - 3.1.2. [Especialidades](#Visualizar-Todas-as-Especialidades-Medicas)  
@@ -37,20 +37,14 @@ Desenvolvida na escola SENAI de informatica para a empresa SP Medical Group , a 
   
 - 4 **[Validação](#Validação-e-Autorização)**  
    - 4.1. - [Campos](#Campos)  
-   - 4.2. - [Metodos](#Metodos)  
+   - 4.2. - [Requisições](#Requisições)  
    
-- 5 **[Usando a API](#)**
-  - 5.1. [Usando o Postman](#Usando-o-Postman)  
-  - 5.2. [Acessando Paginas](#Acessando-Paginas)  
-  - 5.3. [Exemplos do Postman](#Exemplos-de-json)
-
 ## Requisitos  
 A API tem alguns requisitos para que a mesma funcione e seja executada.  
 
 ### Programas necessarios
 Aqui ficará a lista com todos os programas que usei no desenvolvimento : 
 - Visual Studio 2017 - Programação  
-- _Postman - Teste_ (Pode-se usar o swagger)  
 - SQL Server Management Studio 2014/2017 - Banco de dados  
 
 ### Banco de dados  
@@ -121,13 +115,15 @@ O Postman é usado para testar todos os metodos e paginas da aplicação, lá te
 Recomendo que use este programa, pois as paginas precisam de autorização e nesse programa tem como você usar o token para autenticação  
 ### Swagger
 Swagger é uma documentação já gerada na API onde você pode ver todos os metodos, quais verbos usam (get, post , put (não tem Delete porque não é seguro apagar dados)) e quais os parametros aceitos por eles.  
+Pode acessa-lo no endpoint *\swagger\index.html*
 Particularmente **não recomendo** usar o Swagger para teste e sim só para entender como funciona a entrada de dados em certos metodos, ja que o swagger não aceita autenticação por token e quase todos os metodos da API precisam de autenticação.  
 
-## Funcionalidades  
-As funcionalidades da API são divididas em 3 : funcionalidades de **inserção** de dados , **alteração** de dados e de **listagem** de dados  
+## Endpoints  
+Os endpoints da API estarão todos listados por aqui, Eles são divididos em 3 partes : Alteração , Inserção e visualização . Endpoints são qualquer interação com a API.  
 
 ### Visualização  
-Os metodos de visualização são metodos onde retornam valores salvos no banco de dados ao usuario.  
+Os endpoints de visualização são metodos onde retornam valores salvos no banco de dados ao usuario. Muito dos endpoints de visualização estão disponiveis para usuarios e outras apenas para administradores  
+**Verbo Http** : GET  
 **Alguns metodos de visualização tem retornos diferentes** (depende do que você está usando, SQLClient ou EntityFramework)  
  
 - #### Visualizar Todas as Consultas   
@@ -165,8 +161,9 @@ Os metodos de visualização são metodos onde retornam valores salvos no banco 
  **Retorno** : Todos os usuarios cadastrados no banco de dados  
 
 ### Cadastro
-Metodos de cadastro são metodos onde o usuario (geralmente com privilegios de administrador) insere registros no banco de dados. **Esses metodos devem ser usado com cuidado** (principalmente se estiver usando SQLClient) ja que **são dados que ficarão salvos para sempre no banco de dados** (não há metodos para excluir dados ainda) e nem todos os erros foram tratados ainda.  
-Para cadastrar ou alterar veja [Usando a API/Cadastrando Dados](#).  
+Os endpoints de cadastro são usados para enviar dados para a API 
+Verbo Http : POST  
+Os dados deverão ser enviados para API atraves do corpo da requisição 
   
 #### Cadastrar Consultas  
 Cadastra uma consulta no banco de dados
@@ -191,7 +188,7 @@ Cadastra um Medico e um Usuario para o Medico no banco de dados
 **Caminho**: */api/Medico/Cadastrar*  
 **Requisitos** : Estar logado com um usuario com privilegios de Administrador  
 **Parametros(Entity Framework)** : Um medico com os valores preenchidos (JSON)  
-**Parametros(SqlClient)** : Um medico com os valores preenchidos e um Usuario dentro dele (Veja :  [Exemplos do Postman](#Exemplos-do-Postman))  
+**Parametros(SqlClient)** : Um medico com os valores preenchidos e um Usuario dentro dele (Veja :  [Requisições](#Requisições))  
 
 #### Cadastrar Pacientes  
 - **Entity framework**  
@@ -201,7 +198,7 @@ Cadastra um Paciente e um Usuario para o Paciente no banco de dados
 **Caminho**: */api/Paciente/Cadastrar*  
 **Requisitos** : Estar logado com um usuario com privilegios de Administrador  
 **Parametros(Entity Framework)** : Um Paciente com os valores preenchidos (JSON)  
-**Parametros(SqlClient)** : Um Paciente com os valores preenchidos e um Usuario dentro dele (Veja :  [Exemplos do Postman](#Exemplos-do-Postman))  
+**Parametros(SqlClient)** : Um Paciente com os valores preenchidos e um Usuario dentro dele (Veja :  [Requisições](#Requisições))  
   
 #### Cadastrar Usuarios  
 - **Entity Framework**
@@ -258,8 +255,8 @@ Altera **todos** os valores de um paciente (desde os dados de medico até o de u
 
 **Caminho**: */api/Paciente/Alterar*  
 **Requisitos** : Um usuario com privilegios de Administrador ou um Paciente (mas ele só poderá alterar seus valores)  
-**Parametros(Entity Framework)** :  Um paciente com um usuario dentro dele
-**Parametros(SqlClient)** :  
+**Parametros(Entity Framework)** :  Um paciente com todas as informações ja alteradas  
+**Parametros(SqlClient)** : Um paciente com o usuario que o referencia dentro dele  
 
 ## Validação e Autorização  
 Nem todos os metodos da API estão disponiveis para todos usarem, muitos desses metodos precisam de autenticação. Alem disso , metodos onde você precisa envia dados para o banco de dados tem os campos inseridos validados.  
@@ -382,4 +379,103 @@ O ID de qualquer instancia **não é obrigatorio no caso de inserção**. Caso q
    - Não pode ser nulo  
    - Deve ser um valor que exista na Enumeração EnSituacaoConsulta  
  
-### Metodos
+#### Requisições
+Aqui ficará tudo que deve ser inserido para cada requisição.  
+** Todas essas requisições precisam que o usuario tenha um token (recebido quando for logado)**  
+**Você precisará adicionar o id caso queira alterar um cadastro (pra especificar qual registro será alterado)**  
+ - **Cadastrar /Alterar Usuario**  
+ ```json
+{
+  		"email": "string",
+  		"senha": "string"
+  }
+```
+  
+- **Cadastrar /Alterar Paciente**  
+ - **(Entity Framework)**  
+```json
+{
+  		 "idUsuario": 0,
+		  "nome": "string",
+		  "cpf": "string",
+		  "rg": "string",
+		  "telefone": "string",
+		  "dataNascimento": "string"
+ }
+```
+  
+ - **(SqlClient)**  
+```json
+{
+		  "nome": "string",
+		  "cpf": "string",
+		  "rg": "string",
+		  "telefone": "string",
+		  "dataNascimento": "string",
+		  "idUsuarioNavigation": {
+				"email": "string",
+				"senha": "string",
+				"tipoUsuario": 1
+			}
+}
+```
+  
+- **Cadastrar /Alterar Medico**  
+ - **(Entity Framework)**  
+```json
+{
+ 		 "idUsuario": 0,
+ 		 "nome": "string",
+  		"crm": "string",
+  		"idClinica": 0,
+  		"idEspecialidade": 0
+ }
+```
+  
+ - **(SqlClient)**  
+```json
+{
+		  "nome": "string",
+		  "cpf": "string",
+		  "rg": "string",
+		  "telefone": "string",
+		  "dataNascimento": "string",
+		   "idClinica": 0,
+		   "idEspecialidade": 0
+		   "idUsuarioNavigation": {
+				"email": "string",
+				"senha": "string",
+				"tipoUsuario": 1
+			}
+}
+```
+  
+ - **Cadastrar / Alterar Clinica**  
+```json
+{
+		  "nomeFantasia": "string",
+		  "endereco": "string",
+		  "numero": 0,
+		  "cep": "string",
+		  "razaoSocial": "string"
+ }
+```
+  
+ - **Cadastrar / Alterar Especialidades**  
+```json
+{
+  		"nome": "string"
+ }
+```
+  
+ - **Cadastrar / Alterar Consulta**  
+```json
+{
+		  "id": 0,
+		  "idMedico": 0,
+		  "idPaciente": 0,
+		  "dataConsulta": "YYYY-MM-DD hh:mm",
+		  "descricao": "string",
+		  "statusConsulta": 1
+}
+```

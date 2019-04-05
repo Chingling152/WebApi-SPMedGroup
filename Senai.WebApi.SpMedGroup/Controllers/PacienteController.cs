@@ -10,7 +10,7 @@ using Senai.WebApi.SpMedGroup.Repositories.EntityFramework;
 namespace Senai.WebApi.SpMedGroup.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [Produces("application/json")]
     public class PacienteController : ControllerBase
     {
@@ -57,6 +57,18 @@ namespace Senai.WebApi.SpMedGroup.Controllers
                     }
                 }
                 Repositorio.Cadastrar(paciente);
+                return Ok(Repositorio.Listar());
+            } catch (Exception exc) {
+                return BadRequest(exc.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("Alterar")]
+        [Authorize(Roles = "Administrador")]
+        public IActionResult Alterar(Paciente paciente) {
+            try {
+                Repositorio.Alterar(paciente);
                 return Ok(Repositorio.Listar());
             } catch (Exception exc) {
                 return BadRequest(exc.Message);

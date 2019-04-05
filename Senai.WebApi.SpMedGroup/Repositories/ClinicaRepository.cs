@@ -13,11 +13,43 @@ namespace Senai.WebApi.SpMedGroup.Repositories {
         private const string Database = "Data Source = .\\MEUSERVIDOR; initial catalog = SENAI_SP_MEDGROUP; user id = sa; pwd = 132";
 
         public void Alterar(Clinica clinica) {
-            throw new System.NotImplementedException();
+            using (SqlConnection Conexao = new SqlConnection(Database)) {
+                Conexao.Open();
+
+                string Comando = "AtualizarClinica @NOME_FANTASIA ,@CEP ,@ENDERECO ,@NUMERO ,@RAZAO_SOCIAL";
+
+                SqlCommand cmd = new SqlCommand(Comando, Conexao);
+                cmd.Parameters.AddWithValue("@NOME_FANTASIA", clinica.NomeFantasia);
+                cmd.Parameters.AddWithValue("@CEP", clinica.Cep);
+                cmd.Parameters.AddWithValue("@ENDERECO", clinica.Endereco);
+                cmd.Parameters.AddWithValue("@NUMERO", clinica.Numero);
+                cmd.Parameters.AddWithValue("@RAZAO_SOCIAL", clinica.RazaoSocial);
+
+                cmd.ExecuteNonQuery();
+
+            }
         }
 
+        /// <summary>
+        /// Cadastra uma list ano banco de dados
+        /// </summary>
+        /// <param name="clinica">Clinica a ser cadastrada</param>
         public void Cadastrar(Clinica clinica) {
-            throw new System.NotImplementedException();
+            using (SqlConnection Conexao = new SqlConnection(Database)) {
+                Conexao.Open();
+
+                string Comando = "InserirClinica @NOME_FANTASIA ,@CEP ,@ENDERECO ,@NUMERO ,@RAZAO_SOCIAL";
+
+                SqlCommand cmd = new SqlCommand(Comando,Conexao);
+                cmd.Parameters.AddWithValue("@NOME_FANTASIA", clinica.NomeFantasia);
+                cmd.Parameters.AddWithValue("@CEP", clinica.Cep);
+                cmd.Parameters.AddWithValue("@ENDERECO", clinica.Endereco);
+                cmd.Parameters.AddWithValue("@NUMERO", clinica.Numero);
+                cmd.Parameters.AddWithValue("@RAZAO_SOCIAL", clinica.RazaoSocial);
+
+                cmd.ExecuteNonQuery();
+
+            }
         }
 
         /// <summary>

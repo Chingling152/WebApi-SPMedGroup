@@ -9,7 +9,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
 {
     [ApiController]
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class ClinicaController : ControllerBase
     {
         private readonly IClinicaRepository Repositorio;
@@ -34,6 +34,19 @@ namespace Senai.WebApi.SpMedGroup.Controllers
         public IActionResult Cadastrar(Clinica clinica) {
             try {
                 Repositorio.Cadastrar(clinica);
+                return Ok(Repositorio.Listar());
+            } catch (Exception exc) {
+                return BadRequest(exc.Message);
+            }
+        }
+
+
+        [HttpPut]
+        [Route("Alterar")]
+        [Authorize(Roles = "Administrador")]
+        public IActionResult Alterar(Clinica clinica) {
+            try {
+                Repositorio.Alterar(clinica);
                 return Ok(Repositorio.Listar());
             } catch (Exception exc) {
                 return BadRequest(exc.Message);

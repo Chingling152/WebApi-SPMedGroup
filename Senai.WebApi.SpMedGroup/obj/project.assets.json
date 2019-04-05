@@ -12646,11 +12646,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\o\\Jogos\\Outros\\Meus Projetos\\APIs\\Sp Medical Group\\Senai.WebApi.SpMedGroup\\Senai.WebApi.SpMedGroup.csproj",
+      "projectUniqueName": "E:\\o\\Jogos\\Outros\\Meus Projetos\\APIs\\Sp Medical Group\\SP Medical Group v1\\Senai.WebApi.SpMedGroup\\Senai.WebApi.SpMedGroup.csproj",
       "projectName": "Senai.WebApi.SpMedGroup",
-      "projectPath": "E:\\o\\Jogos\\Outros\\Meus Projetos\\APIs\\Sp Medical Group\\Senai.WebApi.SpMedGroup\\Senai.WebApi.SpMedGroup.csproj",
+      "projectPath": "E:\\o\\Jogos\\Outros\\Meus Projetos\\APIs\\Sp Medical Group\\SP Medical Group v1\\Senai.WebApi.SpMedGroup\\Senai.WebApi.SpMedGroup.csproj",
       "packagesPath": "C:\\Users\\debar\\.nuget\\packages\\",
-      "outputPath": "E:\\o\\Jogos\\Outros\\Meus Projetos\\APIs\\Sp Medical Group\\Senai.WebApi.SpMedGroup\\obj\\",
+      "outputPath": "E:\\o\\Jogos\\Outros\\Meus Projetos\\APIs\\Sp Medical Group\\SP Medical Group v1\\Senai.WebApi.SpMedGroup\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

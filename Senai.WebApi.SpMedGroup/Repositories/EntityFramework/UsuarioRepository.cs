@@ -9,7 +9,6 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
     /// Classe responsavel por cadastrar e listar Usuarios (independente de serm administradores , medicos ou pacientes)
     /// </summary>
     public class UsuarioRepository : IUsuarioRepository {
-
         /// <summary>
         /// Cadastra um usuario no banco de dados
         /// </summary>

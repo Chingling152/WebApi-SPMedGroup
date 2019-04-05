@@ -27,7 +27,6 @@ namespace Senai.WebApi.SpMedGroup.Repositories {
                     cmd.Parameters.AddWithValue("@EMAIL",usuario.Email);
                     cmd.Parameters.AddWithValue("@SENHA", usuario.Senha);
                     cmd.Parameters.AddWithValue("@TIPO_USUARIO", usuario.TipoUsuario);
-                    throw new Exception($"Cadastrou o usuario :\n{usuario.Email}\n{usuario.Senha}\n{usuario.TipoUsuario}");
                     cmd.ExecuteNonQuery();
                 }
             }

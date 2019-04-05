@@ -11,6 +11,17 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
     public class MedicoRepository : IMedicoRepository {
 
         /// <summary>
+        /// Altera todas as informações de um medico
+        /// </summary>
+        /// <param name="medico">Medico com os valores ja alterados</param>
+        public void Alterar(Medico medico) {
+            using (SpMedGroupContext ctx = new SpMedGroupContext()) {
+                ctx.Medico.Update(medico);
+                ctx.SaveChanges();
+            }
+        }
+
+        /// <summary>
         /// Cadastra um medico no banco de dados
         /// </summary>
         /// <param name="medico">Medico a ser cadastrado</param>

@@ -57,5 +57,16 @@ namespace Senai.WebApi.SpMedGroup.Controllers {
                 return BadRequest(exc.Message);
             }
         }
+
+        [HttpPut("Alterar")]
+        [Authorize(Roles = "Administrador")]
+        public IActionResult Alterar(Medico medico) {
+            try {
+                Repositorio.Alterar(medico);
+                return Ok(Repositorio.Listar());
+            } catch (Exception exc) {
+                return BadRequest(exc.Message);
+            }
+        }
     }
 }

@@ -8,7 +8,7 @@ using Senai.WebApi.SpMedGroup.Repositories.EntityFramework;//remova o "EntityFra
 namespace Senai.WebApi.SpMedGroup.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [Produces("application/json")]
     public class EspecialidadeController : ControllerBase
     {

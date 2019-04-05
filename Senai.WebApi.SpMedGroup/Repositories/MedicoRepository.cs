@@ -13,6 +13,27 @@ namespace Senai.WebApi.SpMedGroup.Repositories {
         private const string Database = "Data Source = .\\MEUSERVIDOR; initial catalog = SENAI_SP_MEDGROUP;user id = sa ; pwd = 132";
 
         /// <summary>
+        /// Altera tidas as informações de um medico
+        /// </summary>
+        /// <param name="medico">Medico com os valores ja alterados</param>
+        public void Alterar(Medico medico) {
+            using (SqlConnection Conexao = new SqlConnection(Database)) {
+                Conexao.Open();
+                string Comando = "AlterarMedico @EMAIL , @SENHA , @NOME, @CRM , @ID_CLINICA, @ID_ESPECIALIDADE;";
+
+                SqlCommand cmd = new SqlCommand(Comando, Conexao);
+                cmd.Parameters.AddWithValue("@EMAIL", medico.IdUsuarioNavigation.Email);
+                cmd.Parameters.AddWithValue("@SENHA", medico.IdUsuarioNavigation.Senha);
+                cmd.Parameters.AddWithValue("@NOME", medico.Nome);
+                cmd.Parameters.AddWithValue("@CRM", medico.Crm);
+                cmd.Parameters.AddWithValue("@ID_CLINICA", medico.IdClinica);
+                cmd.Parameters.AddWithValue("@ID_ESPECIALIDADE", medico.IdEspecialidade);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        /// <summary>
         /// Cadastra um Usuario e um Medico (que referenciara ao Usuario cadastrado) ao mesmo tempo
         /// </summary>
         /// <param name="medico">Medico com todas as suas informações preechidas</param>
