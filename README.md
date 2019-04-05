@@ -127,55 +127,55 @@ Os endpoints de visualização são metodos onde retornam valores salvos no banc
 **Alguns metodos de visualização tem retornos diferentes** (depende do que você está usando, SQLClient ou EntityFramework)  
  
 - #### Visualizar Todas as Consultas   
-**Caminho**: */api/Consulta*  
+**Caminho**: */apiv1/Consulta*  
 **Requisitos** : Estar logado com um usuario com privilegios de administrador  
 **Retorno(Entity Framework)** : Todas as consultas cadastradas no banco de dados  
 **Retorno(SqlClient)** : Todas as consultas cadastradas no banco de dados (com as informações dos pacientes e medicos)  
 
 - #### Visualizar Suas Consultas  
-**Caminho(Medico)**: */api/Medico/VerConsultas*  
-**Caminho(Paciente)**: */api/Paciente/VerConsultas*  
+**Caminho(Medico)**: */api/v1/Medico/VerConsultas*  
+**Caminho(Paciente)**: */api/v1/Paciente/VerConsultas*  
 **Requisitos** : Estar logado com um usuario com privilegios de medico ou Paciente  
 **Retorno(Entity Framework)** : Todas as consultas feitas pelo Medico/Paciente  
 **Retorno(SqlClient)** : Todas as informações de todas as consultas feitas pelo Medico/Paciente   
 
 - #### Visualizar Todas as Especialidades Medicas  
-**Caminho**: */api/Especialidade*  
+**Caminho**: */apiv1/Especialidade*  
 **Requisitos** : Estar logado com um usuario com privilegios de administrador (Mas em breve deixarei publica)  
 **Retorno** : Todas as especialidades medicas cadastradas no banco de dados  
 
 - #### Visualizar Todos os Medicos  
-**Caminho**: */api/Medico*  
+**Caminho**: */api/v1/Medico*  
 **Requisitos** : Estar logado com um usuario com privilegios de administrador  
 **Retorno(Entity Framework)** : Todas as informações de todos os medicos  
 **Retorno(SqlClient)** : Todas as informações dos medicos (porém um pouco mais precisas)  
 
 - #### Visualizar Todos os Pacientes  
-**Caminho**: */api/Paciente*
+**Caminho**: */api/v1/Paciente*
 **Requisitos** : Estar logado com um usuario com privilegios de administrador  
 **Retorno** : Todas as informações de todos os pacientes  
 
 - #### Visualizar Todos os Usuarios  
-**Caminho**: */api/Usuario*  
+**Caminho**: */api/v1/Usuario*  
  **Requisitos** : Estar logado com um usuario com privilegios de administrador  
  **Retorno** : Todos os usuarios cadastrados no banco de dados  
 
 ### Cadastro
 Os endpoints de cadastro são usados para enviar dados para a API 
-Verbo Http : POST  
+**Verbo Http** : POST  
 Os dados deverão ser enviados para API atraves do corpo da requisição 
   
 #### Cadastrar Consultas  
 Cadastra uma consulta no banco de dados
 
-**Caminho**: */api/Consulta/Cadastrar*  
+**Caminho**: */api/v1/Consulta/Cadastrar*  
 **Requisitos** : Estar logado com um usuario com privilegios de Administrador ou Medico  
 **Parametros** : Uma consulta com os valores preenchidos (JSON)  
 
 #### Cadastrar Especialidades Medicas  
 Cadastra uma especialidade medica no banco de dados  
   
-**Caminho**: */api/Especialidade/Cadastrar*  
+**Caminho**: */api/v1/Especialidade/Cadastrar*  
 **Requisitos** : Estar logado com um usuario com privilegios de Administrador  
 **Parametros** : Uma especialidade medica com os valores preenchidos (JSON)  
 
@@ -185,7 +185,7 @@ Cadastra um Medico no banco de dados
 - **SqlClient**  
 Cadastra um Medico e um Usuario para o Medico no banco de dados  
   
-**Caminho**: */api/Medico/Cadastrar*  
+**Caminho**: */api/v1/Medico/Cadastrar*  
 **Requisitos** : Estar logado com um usuario com privilegios de Administrador  
 **Parametros(Entity Framework)** : Um medico com os valores preenchidos (JSON)  
 **Parametros(SqlClient)** : Um medico com os valores preenchidos e um Usuario dentro dele (Veja :  [Requisições](#Requisições))  
@@ -195,7 +195,7 @@ Cadastra um Medico e um Usuario para o Medico no banco de dados
 Cadastra um Paciente no banco de dados   
 - **SqlClient**  
 Cadastra um Paciente e um Usuario para o Paciente no banco de dados  
-**Caminho**: */api/Paciente/Cadastrar*  
+**Caminho**: */api/v1/Paciente/Cadastrar*  
 **Requisitos** : Estar logado com um usuario com privilegios de Administrador  
 **Parametros(Entity Framework)** : Um Paciente com os valores preenchidos (JSON)  
 **Parametros(SqlClient)** : Um Paciente com os valores preenchidos e um Usuario dentro dele (Veja :  [Requisições](#Requisições))  
@@ -206,7 +206,7 @@ Cadastra um Usuario no banco de dados. Que será usado como referencia nos metod
 - **SqlClient**
 Cadastra um Usuario no banco de dados com privilegio de administrador, qualquer outro tipo de usuario inserido irá retornar uma exceção  
   
-**Caminho**: */api/Usuario/Cadastrar*  
+**Caminho**: */api/v1/Usuario/Cadastrar*  
 **Requisitos** : Estar logado com um usuario com privilegios de Administrador  
 **Parametros** : Um Usuario com todos os valores preenchidos (JSON)  
 
@@ -219,7 +219,7 @@ Altera os valores de um usuario no banco de dados
 - **SqlClient**  
 Altera os valores apenas de um *administrador*  
 
-**Caminho**: */api/Usuario/Alterar*  
+**Caminho**: */api/v1/Usuario/Alterar*  
 **Requisitos** : Estar logado com um usuario com privilegios de *Administrador*  
 **Parametros(Entity Framework)** : Um Usuario com os valores preenchidos e alterados (com o ID,em JSON)  
 **Parametros(SqlClient)** : Altera os valores de um administrador  
@@ -227,13 +227,13 @@ Altera os valores apenas de um *administrador*
 #### Alterar Consultas  
 Altera os valores de uma consulta no banco de dados (é usado pelo medico para alterar uma descrição)  
   
-**Caminho**: */api/Consulta/Alterar*  
+**Caminho**: */api/v1/Consulta/Alterar*  
 **Requisitos** : Estar logado com um usuario com privilegios de Administrador  
 **Parametros** : Uma consulta com todos os valores ja alterados (precisa do ID para saber qual registro será alterado)  
 
 #### Alterar Especialidades Medicas  
 Altera o nome de uma especialidade medica no banco de dados 
-**Caminho**: */api/Especialidade/Alterar*  
+**Caminho**: */api/v1/Especialidade/Alterar*  
 **Requisitos** : Estar logado com um usuario com privilegios de Administrador  
 **Parametros** : Uma Especialidade com o nome ja alterado (precisa do ID para saber qual registro será alterado)  
 
@@ -243,7 +243,7 @@ Altera os valores de um medicos no banco de dados (não afeta os dados de usuari
 - **SqlClient**  
 Altera **todos** os valores de um medico (desde os dados de medico até o de usuario como email e senha) **não muda o usuario de origem**  
 
-**Caminho**: */api/Medico/Alterar*  
+**Caminho**: */api/v1/Medico/Alterar*  
 **Requisitos** : Estar logado com um usuario com privilegios de *Administrador* ou *Medico* (porém você poderá apenas alteras suas informações)  
 **Parametros(Entity Framework)** : Um Medico com o usuario dentro dele com os valores preenchidos e alterados (com o ID, o ID do Usuario deve ser o mesmo registrado no banco de dados)  
 **Parametros(SqlClient)** : Altera os valores de um administrador  
@@ -253,12 +253,17 @@ Altera os valores de um medicos no banco de dados (não afeta os dados de usuari
 - **SqlClient**  
 Altera **todos** os valores de um paciente (desde os dados de medico até o de usuario como email e senha)  
 
-**Caminho**: */api/Paciente/Alterar*  
+**Caminho**: */api/v1/Paciente/Alterar*  
 **Requisitos** : Um usuario com privilegios de Administrador ou um Paciente (mas ele só poderá alterar seus valores)  
 **Parametros(Entity Framework)** :  Um paciente com todas as informações ja alteradas  
 **Parametros(SqlClient)** : Um paciente com o usuario que o referencia dentro dele  
 
-## Validação e Autorização  
+
+
+
+
+
+# Validação e Autorização  
 Nem todos os metodos da API estão disponiveis para todos usarem, muitos desses metodos precisam de autenticação. Alem disso , metodos onde você precisa envia dados para o banco de dados tem os campos inseridos validados.  
 ### Campos  
 Validação de campos da API apenas uma maneira de prevenir que nenhum dado sera inserido incorretamente no banco de dados.  
@@ -281,7 +286,7 @@ O ID de qualquer instancia **não é obrigatorio no caso de inserção**. Caso q
  - **Tipo de usuario**:
 	- Numero inteiro  
 	- Não pode ser nulo  
-	- Deve se referir à algum valor na enumeração [EnTipoUsuario](#)  
+	- Deve se referir à algum valor na enumeração [EnTipoUsuario](#https://github.com/Chingling152/WebApi-SPMedGroup/blob/master/Senai.WebApi.SpMedGroup/Enums/EnTipoUsuario.cs)  
 	
 #### Paciente  
  - **ID da conta**  
@@ -377,7 +382,7 @@ O ID de qualquer instancia **não é obrigatorio no caso de inserção**. Caso q
 - **Situação da consulta**
    - Numero inteiro  
    - Não pode ser nulo  
-   - Deve ser um valor que exista na Enumeração EnSituacaoConsulta  
+   - Deve ser um valor que exista na Enumeração [EnSituacaoConsulta](https://github.com/Chingling152/WebApi-SPMedGroup/blob/master/Senai.WebApi.SpMedGroup/Enums/EnSituacaoConsulta.cs)  
  
 #### Requisições
 Aqui ficará tudo que deve ser inserido para cada requisição.  
