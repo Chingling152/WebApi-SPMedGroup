@@ -58,12 +58,55 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
         /// <param name="ID">ID do paciente selecionado</param>
         /// <returns>Todas as consultas do paciente, ou uma exceção caso o Paciente não exista</returns>
         public Paciente VerConsultas(int ID) {
-            Paciente paciente = new SpMedGroupContext().Paciente.Include(x => x.Consulta).ToList().Find(i => i.IdUsuario == ID);
+            using(SpMedGroupContext ctx = new SpMedGroupContext()) {
+                Paciente paciente = (
+                        from Pa in ctx.Paciente 
+                        join Us in ctx.Usuario on Pa.IdUsuario equals Us.Id
 
-            if (paciente == null)
-                throw new System.NullReferenceException("Não existe Paciente com este ID");
+                        select new Paciente() {
+                                Id = Pa.Id,
+                                IdUsuario = Pa.IdUsuario,
+                                IdUsuarioNavigation = Us,
+                                Nome = Pa.Nome,
+                                Cpf = Pa.Cpf,
+                                Rg = Pa.Rg,
+                                DataNascimento = Pa.DataNascimento,
+                                Telefone = Pa.Telefone,
+                                Consulta = (
 
-            return paciente;
+                                    from Co in ctx.Consulta
+                                    join Me in ctx.Medico on Co.Id equals Me.Id
+                                    join Cl in ctx.Clinica on Me.IdClinica equals Cl.Id        // Clinica
+                                    join Es in ctx.Especialidade on Me.IdEspecialidade equals Es.Id
+                                    where Co.IdPaciente == Pa.Id
+
+                                    select new Consulta() {
+                                        Id = Co.Id,
+                                        DataConsulta = Co.DataConsulta,
+                                        Descricao = Co.Descricao,
+                                        StatusConsulta = Co.StatusConsulta,
+                                        IdMedico = Co.IdMedico,
+                                        IdPaciente = Co.IdPaciente,
+                                        IdMedicoNavigation = new Medico(){
+                                            Id = Me.Id,
+                                            Nome = Me.Nome,
+                                            Crm = Me.Crm,
+                                            IdClinica = Me.IdClinica,
+                                            IdClinicaNavigation = Cl,
+                                            IdEspecialidade = Me.IdEspecialidade,
+                                            IdEspecialidadeNavigation = Es
+                                        }
+                                    } 
+                                    
+                                ).ToList()
+                            }
+                        ).First(i => i.IdUsuario == ID);
+
+                if (paciente == null)
+                    throw new System.NullReferenceException("Não existe Paciente com este ID");
+
+                return paciente;
+            }
         }
     }
 }

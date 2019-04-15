@@ -18,7 +18,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Especialidade",
+							"raw": "http://localhost:5000/api/v1/Especialidade",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -26,6 +26,7 @@
 							"port": "5000",
 							"path": [
 								"api",
+								"v1",
 								"Especialidade"
 							]
 						}
@@ -49,7 +50,7 @@
 							"raw": "{\n\t\"id\" : 0 , \n\t\"nome\" : \"nome\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Especialidade/Cadastrar",
+							"raw": "http://localhost:5000/api/v1/Especialidade/Cadastrar",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -57,6 +58,7 @@
 							"port": "5000",
 							"path": [
 								"api",
+								"v1",
 								"Especialidade",
 								"Cadastrar"
 							]
@@ -81,7 +83,7 @@
 							"raw": "{\n\t\"id\" : 0 , \n\t\"nome\" : \"nome\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Especialidade/Alterar",
+							"raw": "http://localhost:5000/api/v1/Especialidade/Alterar",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -89,6 +91,7 @@
 							"port": "5000",
 							"path": [
 								"api",
+								"v1",
 								"Especialidade",
 								"Alterar"
 							]
@@ -118,7 +121,7 @@
 							"raw": "{\r\n  \"id\": 0,\r\n  \"email\": \"email\",\r\n  \"senha\": \"senha\",\r\n  \"tipoUsuario\": 1\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Usuario/Cadastrar",
+							"raw": "http://localhost:5000/api/v1/Usuario/Cadastrar",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -126,6 +129,7 @@
 							"port": "5000",
 							"path": [
 								"api",
+								"v1",
 								"Usuario",
 								"Cadastrar"
 							]
@@ -144,7 +148,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Usuario",
+							"raw": "http://localhost:5000/api/v1/Usuario",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -152,6 +156,7 @@
 							"port": "5000",
 							"path": [
 								"api",
+								"v1",
 								"Usuario"
 							]
 						},
@@ -176,7 +181,7 @@
 							"raw": "{\n    \"email\": \"ricardo.lemos@spmedicalgroup.com.br\",\n    \"senha\": \"MVIV3f9J\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Usuario/Login",
+							"raw": "http://localhost:5000/api/v1/Usuario/Login",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -184,6 +189,7 @@
 							"port": "5000",
 							"path": [
 								"api",
+								"v1",
 								"Usuario",
 								"Login"
 							]
@@ -391,6 +397,39 @@
 							"body": null
 						}
 					]
+				},
+				{
+					"name": "Alterar",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : 0 , \n\t\"nome\" : \"nome\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/Usuario/Alterar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"Usuario",
+								"Alterar"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -414,7 +453,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Paciente",
+							"raw": "http://localhost:5000/api/v1/Paciente",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -422,6 +461,7 @@
 							"port": "5000",
 							"path": [
 								"api",
+								"v1",
 								"Paciente"
 							]
 						},
@@ -456,7 +496,7 @@
 							"raw": "{\r\n  \"id\": 0,\r\n  \"idUsuario\": 0,\r\n  \"nome\": \"string\",\r\n  \"cpf\": \"string\",\r\n  \"rg\": \"string\",\r\n  \"telefone\": \"string\",\r\n  \"dataNascimento\": \"2001-07-23\",\r\n  \"idUsuarioNavigation\": {\r\n    \"id\": 0,\r\n    \"email\": \"string\",\r\n    \"senha\": \"string\",\r\n    \"tipoUsuario\": 1\r\n  }\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Paciente/Cadastrar",
+							"raw": "http://localhost:5000/api/v1/Paciente/Cadastrar",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -464,6 +504,7 @@
 							"port": "5000",
 							"path": [
 								"api",
+								"v1",
 								"Paciente",
 								"Cadastrar"
 							]
@@ -589,7 +630,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZXhhbmRyZUBnbWFpbC5jb20iLCJqdGkiOiIyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiUGFjaWVudGUiLCJleHAiOjE1NTI1NzMwNDMsImlzcyI6IlNQTWVkaWNhbEdyb3VwIiwiYXVkIjoiU1BNZWRpY2FsR3JvdXAifQ.-jSeZTzdrGGW5OQKlbiDsA6riJ7cBr34V_VYSlEunKQ",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZXhhbmRyZUBnbWFpbC5jb20iLCJqdGkiOiIyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiUGFjaWVudGUiLCJleHAiOjE1NTUzMzUxMzIsImlzcyI6IlNQTWVkaWNhbEdyb3VwIiwiYXVkIjoiU1BNZWRpY2FsR3JvdXAifQ.iX53OA01D4zboUA9DD27spgHOB5FBhPkdUga0iaLtiw",
 									"type": "string"
 								}
 							]
@@ -601,7 +642,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Paciente/VerConsultas",
+							"raw": "http://localhost:5000/api/v1/Paciente/VerConsultas",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -609,8 +650,42 @@
 							"port": "5000",
 							"path": [
 								"api",
+								"v1",
 								"Paciente",
 								"VerConsultas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"idMedico\": 0,\r\n  \"idPaciente\": 0,\r\n  \"dataConsulta\": \"2019-03-13T13:57:36.359Z\",\r\n  \"descricao\": \"string\",\r\n  \"statusConsulta\": 1\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/Paciente/Alterar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"Paciente",
+								"Alterar"
 							]
 						}
 					},
@@ -622,14 +697,47 @@
 			"name": "Medicos",
 			"item": [
 				{
-					"name": "Listar Todos",
+					"name": "Alterar",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : 0 , \n\t\"nome\" : \"nome\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/Medico/Alterar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"Medico",
+								"Alterar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Consultas",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTUyMzE2MzMxLCJpc3MiOiJTUE1lZGljYWxHcm91cCIsImF1ZCI6IlNQTWVkaWNhbEdyb3VwIn0.ISSMuG0S0S80BYP7zNueaSvAcRrlDyz_JQM415JTB2E",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpY2FyZG8ubGVtb3NAc3BtZWRpY2FsZ3JvdXAuY29tLmJyIiwianRpIjoiOCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6Ik1lZGljbyIsImV4cCI6MTU1NTMzOTQ2MiwiaXNzIjoiU1BNZWRpY2FsR3JvdXAiLCJhdWQiOiJTUE1lZGljYWxHcm91cCJ9.nnFRyqIbOVuHhkd94hUmNk2EcUgJOyhVibi4zrtZrIk",
 									"type": "string"
 								}
 							]
@@ -641,7 +749,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Medico",
+							"raw": "http://localhost:5000/api/v1/Medico/VerConsultas",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -649,7 +757,45 @@
 							"port": "5000",
 							"path": [
 								"api",
-								"Medico"
+								"v1",
+								"Medico",
+								"VerConsultas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpY2FyZG8ubGVtb3NAc3BtZWRpY2FsZ3JvdXAuY29tLmJyIiwianRpIjoiOCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6Ik1lZGljbyIsImV4cCI6MTU1NTMzODAwMywiaXNzIjoiU1BNZWRpY2FsR3JvdXAiLCJhdWQiOiJTUE1lZGljYWxHcm91cCJ9.W9-G0LEGLANFKWS7Vt9QNh2JJizF03-Wpyy3aKm8y6A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/Medico/Listar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"Medico",
+								"Listar"
 							]
 						}
 					},
@@ -682,7 +828,7 @@
 							"raw": "{\n    \"id\": 0,\n    \"idUsuario\": 0,\n    \"nome\": \"string\",\n    \"crm\": \"string\",\n    \"idClinica\":0,\n    \"idEspecialidade\": 0\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Medico/Cadastrar",
+							"raw": "http://localhost:5000/api/v1/Medico/Cadastrar",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -690,6 +836,7 @@
 							"port": "5000",
 							"path": [
 								"api",
+								"v1",
 								"Medico",
 								"Cadastrar"
 							]
@@ -780,7 +927,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Consulta",
+							"raw": "http://localhost:5000/api/v1/Consulta",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -788,6 +935,7 @@
 							"port": "5000",
 							"path": [
 								"api",
+								"v1",
 								"Consulta"
 							]
 						}
@@ -821,7 +969,7 @@
 							"raw": "{\r\n  \"id\": 0,\r\n  \"idMedico\": 1,\r\n  \"idPaciente\": 1,\r\n  \"dataConsulta\": \"2019-03-22\",\r\n  \"descricao\": \"string\",\r\n  \"statusConsulta\": 1\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Consulta/Cadastrar",
+							"raw": "http://localhost:5000/api/v1/Consulta/Cadastrar",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -829,6 +977,7 @@
 							"port": "5000",
 							"path": [
 								"api",
+								"v1",
 								"Consulta",
 								"Cadastrar"
 							]
@@ -908,7 +1057,7 @@
 							"raw": "{\r\n  \"id\": 0,\r\n  \"idMedico\": 0,\r\n  \"idPaciente\": 0,\r\n  \"dataConsulta\": \"2019-03-13T13:57:36.359Z\",\r\n  \"descricao\": \"string\",\r\n  \"statusConsulta\": 1\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Consulta/Alterar",
+							"raw": "http://localhost:5000/api/v1/Consulta/Alterar",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -916,6 +1065,7 @@
 							"port": "5000",
 							"path": [
 								"api",
+								"v1",
 								"Consulta",
 								"Alterar"
 							]
@@ -928,6 +1078,39 @@
 		{
 			"name": "Clinicas",
 			"item": [
+				{
+					"name": "Alterar",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"idMedico\": 0,\r\n  \"idPaciente\": 0,\r\n  \"dataConsulta\": \"2019-03-13T13:57:36.359Z\",\r\n  \"descricao\": \"string\",\r\n  \"statusConsulta\": 1\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/Clinica/Alterar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"Clinica",
+								"Alterar"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Cadastrar",
 					"request": {
@@ -955,7 +1138,7 @@
 							"raw": "{\n    \"id\": 0,\n    \"nomeFantasia\": \"string\",\n    \"endereco\": \"string\",\n    \"numero\": 0,\n    \"cep\": \"string\",\n    \"razaoSocial\": \"string\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Clinica/Cadastrar",
+							"raw": "http://localhost:5000/api/v1/Clinica/Cadastrar",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -963,8 +1146,107 @@
 							"port": "5000",
 							"path": [
 								"api",
+								"v1",
 								"Clinica",
 								"Cadastrar"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Exemplo",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 0,\n    \"nomeFantasia\": \"string\",\n    \"endereco\": \"string\",\n    \"numero\": 0,\n    \"cep\": \"string\",\n    \"razaoSocial\": \"string\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/Clinica/Cadastrar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Clinica",
+										"Cadastrar"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 22 Mar 2019 19:00:40 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Alterar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTUzMjg0NjgwLCJpc3MiOiJTUE1lZGljYWxHcm91cCIsImF1ZCI6IlNQTWVkaWNhbEdyb3VwIn0.zLXjfl26J0WU8Bsvym8H8sBp4XVuEBKk6hz16DskAig",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 0,\n    \"nomeFantasia\": \"string\",\n    \"endereco\": \"string\",\n    \"numero\": 0,\n    \"cep\": \"string\",\n    \"razaoSocial\": \"string\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/Clinica/Alterar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"Clinica",
+								"Alterar"
 							]
 						}
 					},
@@ -1045,7 +1327,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Clinica",
+							"raw": "http://localhost:5000/api/v1/Clinica/Listar",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1053,7 +1335,9 @@
 							"port": "5000",
 							"path": [
 								"api",
-								"Clinica"
+								"v1",
+								"Clinica",
+								"Listar"
 							]
 						}
 					},

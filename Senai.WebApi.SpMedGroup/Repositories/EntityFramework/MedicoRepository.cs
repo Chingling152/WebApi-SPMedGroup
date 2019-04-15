@@ -44,10 +44,10 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
         /// <param name="ID">ID do medico</param>
         /// <returns>Retorna um Medico e sua especialidade , ou uma excessão caso ele não exista</returns>
         public Medico Listar(int ID) {
-            Medico medico = new SpMedGroupContext().Medico.Include(i => i.IdEspecialidadeNavigation).First(x => x.Id == ID);
+            Medico medico = new SpMedGroupContext().Medico.Include(i => i.IdEspecialidadeNavigation).First(i => i.Id == ID);
 
-            if(medico == null)
-                throw new System.NullReferenceException($"Não existe medico no ID {ID}");
+            if (medico == null)
+                    throw new System.NullReferenceException($"Não existe medico no ID {ID}");
 
             return medico;
         }
@@ -58,12 +58,47 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
         /// <param name="ID">ID Do medico selecionado</param>
         /// <returns></returns>
         public Medico VerConsultas(int ID) {
-            Medico medico = new SpMedGroupContext().Medico.Include(x=> x.Consulta).ToList().Find(i => i.IdUsuario == ID);
+        using (SpMedGroupContext ctx = new SpMedGroupContext()) {
+            Medico medico = (
+                    from Me in ctx.Medico
+                    join Us in ctx.Usuario on Me.IdUsuario equals Us.Id
+                    join Cl in ctx.Clinica on Me.IdClinica equals Cl.Id
+                    join Es in ctx.Especialidade on Me.IdEspecialidade equals Es.Id
 
-            if(medico == null)
-                throw new System.NullReferenceException("Não existe Medico com este ID");
+                    select new Medico() {
+                        Id = Me.Id,
+                        Nome = Me.Nome,
+                        Crm = Me.Crm,
+                        IdClinica = Me.IdClinica,
+                        IdClinicaNavigation = Cl,
+                        IdEspecialidade = Me.IdEspecialidade,
+                        IdEspecialidadeNavigation = Es,
+                        IdUsuario = Me.IdUsuario,
+                        IdUsuarioNavigation = Us,
+                        Consulta = (
+                                from Co in ctx.Consulta
+                                join Pa in ctx.Paciente on Co.Id equals Pa.Id
+                                where Co.IdPaciente == Pa.Id
 
-            return medico;
+                                select new Consulta() {
+                                    Id = Co.Id,
+                                    DataConsulta = Co.DataConsulta,
+                                    Descricao = Co.Descricao,
+                                    StatusConsulta = Co.StatusConsulta,
+                                    IdMedico = Co.IdMedico,
+                                    IdPaciente = Co.IdPaciente,
+                                    IdPacienteNavigation = Pa
+                                }
+
+                            ).ToList()
+                    }
+                    ).FirstOrDefault(i => i.IdUsuario == ID);
+            
+                if (medico == null)
+                    throw new System.NullReferenceException("Não existe Medico com este ID");
+
+                return medico;
+            }
         }
     }
 }

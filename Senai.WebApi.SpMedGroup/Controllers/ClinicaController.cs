@@ -19,6 +19,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
         }
 
         [HttpGet]
+        [Route("Listar")]
         [Authorize(Roles = "Administrador")]
         public IActionResult Listar() {
             try {
