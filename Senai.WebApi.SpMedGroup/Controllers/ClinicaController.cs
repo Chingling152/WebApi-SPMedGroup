@@ -35,7 +35,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
         public IActionResult Cadastrar(Clinica clinica) {
             try {
                 Repositorio.Cadastrar(clinica);
-                return Ok(Repositorio.Listar());
+                return Ok($"Clinica {clinica.NomeFantasia} cadastrada com sucesso");
             } catch (Exception exc) {
                 return BadRequest(exc.Message);
             }
@@ -48,7 +48,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
         public IActionResult Alterar(Clinica clinica) {
             try {
                 Repositorio.Alterar(clinica);
-                return Ok(Repositorio.Listar());
+                return Ok($"Clinica {clinica.NomeFantasia} alterada com sucesso");
             } catch (Exception exc) {
                 return BadRequest(exc.Message);
             }

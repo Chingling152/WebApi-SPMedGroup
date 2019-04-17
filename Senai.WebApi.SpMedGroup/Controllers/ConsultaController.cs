@@ -18,6 +18,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers {
         }
 
         [HttpGet]
+        [Route("Listar")]
         [Authorize(Roles = "Administrador")]
         public IActionResult Listar() {
             try {
@@ -33,7 +34,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers {
         public IActionResult Cadastrar(Consulta consulta) {
             try {
                 Repositorio.Cadastrar(consulta);
-                return Ok(Repositorio.Listar());
+                return Ok("Consulta cadastrada com suecsso");
             } catch (Exception exc) {
                 return BadRequest(exc.Message);
             }

@@ -21,6 +21,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
         }
 
         [HttpGet]
+        [Route("Listar")]
         [Authorize(Roles = "Administrador")]
         public IActionResult Listar() {
             try {
@@ -30,7 +31,8 @@ namespace Senai.WebApi.SpMedGroup.Controllers
             }
         }
 
-        [HttpGet("VerConsultas")]
+        [HttpGet]
+        [Route("VerConsultas")]
         [Authorize(Roles = "Paciente")]
         public IActionResult VerConsultas() {
             try {
@@ -57,7 +59,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
                     }
                 }
                 Repositorio.Cadastrar(paciente);
-                return Ok(Repositorio.Listar());
+                return Ok($"Paciente {paciente.Nome} cadastrado com sucesso");
             } catch (Exception exc) {
                 return BadRequest(exc.Message);
             }
@@ -69,7 +71,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
         public IActionResult Alterar(Paciente paciente) {
             try {
                 Repositorio.Alterar(paciente);
-                return Ok(Repositorio.Listar());
+                return Ok($"Paciente {paciente.Nome} alterado com sucesso");
             } catch (Exception exc) {
                 return BadRequest(exc.Message);
             }

@@ -19,6 +19,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
         }
 
         [HttpGet]
+        [Route("Listar")]
         [Authorize(Roles = "Administrador,Medico")]
         public IActionResult Listar() {
             try {
@@ -34,7 +35,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
         public IActionResult Cadastrar(Especialidade especialidade) {
             try {
                 Repositorio.Cadastrar(especialidade);
-                return Ok(Repositorio.Listar());
+                return Ok("Especialidade cadastrada com sucesso");
             } catch (Exception exc) {
                 return BadRequest(exc.Message);
             }
@@ -46,7 +47,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
         public IActionResult Alterar(Especialidade especialidade) {
             try {
                 Repositorio.Alterar(especialidade);
-                return Ok(Repositorio.Listar());
+                return Ok("Especialidade alterada com sucesso");
             } catch (Exception exc) {
                 return BadRequest(exc.Message);
             }

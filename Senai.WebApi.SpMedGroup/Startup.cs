@@ -54,6 +54,13 @@ namespace Senai.WebApi.SpMedGroup {
                     }
                 )
             );
+            services.AddCors(options => {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,7 +75,7 @@ namespace Senai.WebApi.SpMedGroup {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "SP Medical Group");
                 }
             );//usa o arquivo swagger.json e gera uma pagina de documentação
-
+            app.UseCors("CorsPolicy");
             app.UseAuthentication();
 
             app.UseMvc();

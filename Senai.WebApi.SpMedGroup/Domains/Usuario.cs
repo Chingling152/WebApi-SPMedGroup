@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Senai.WebApi.SpMedGroup.Enums;
 
 namespace Senai.WebApi.SpMedGroup.Domains
@@ -25,6 +27,7 @@ namespace Senai.WebApi.SpMedGroup.Domains
         public string Senha { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "O Usuario precisa ter um nivel de privilegio")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public EnTipoUsuario TipoUsuario { get; set; }
 
         public ICollection<Medico> Medico { get; set; }

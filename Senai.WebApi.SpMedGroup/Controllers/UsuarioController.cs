@@ -21,6 +21,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
         public UsuarioController() => Repositorio = new UsuarioRepository();
 
         [HttpGet]
+        [Route("Listar")]
         [Authorize(Roles = "Administrador")]
         public IActionResult Listar() {
             try {
@@ -36,7 +37,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
         public IActionResult Cadastrar(Usuario usuario) {
             try {
                 Repositorio.Cadastrar(usuario);
-                return Ok(Repositorio.Listar());
+                return Ok($"Usuario cadastrado com sucesso");
             } catch (Exception exc) {
                 return BadRequest(exc.Message);
             }
@@ -55,6 +56,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
                 var claims = new[] {
                     new Claim(JwtRegisteredClaimNames.Email,user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti,user.Id.ToString()),
+                    new Claim(ClaimTypes.Role,user.TipoUsuario.ToString()),
                     new Claim("TipoUsuario",user.TipoUsuario.ToString()),
                 };
 

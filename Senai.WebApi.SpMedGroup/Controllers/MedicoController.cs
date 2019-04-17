@@ -40,31 +40,33 @@ namespace Senai.WebApi.SpMedGroup.Controllers {
                     throw new Exception("O Usuario referenciado não pode ter privilegios de um medico");
                 }
                 Repositorio.Cadastrar(medico);
-                return Ok(Repositorio.Listar());
+                return Ok($"Medico {medico.Nome} cadastrado com sucesso");
             } catch (Exception exc) {
                 return BadRequest(exc.Message);
             }
         }
 
-        [HttpGet("VerConsultas")]
+        [HttpGet]
+        [Route("VerConsultas")]
         [Authorize(Roles = "Medico,Administrador")]
         public IActionResult VerConsultas() {
             try {
                 int ID = Convert.ToInt32(
                     HttpContext.User.Claims.First(i => i.Type == JwtRegisteredClaimNames.Jti).Value
                 );
-                return Ok(Repositorio.VerConsultas(ID));
+                return Ok("");
             } catch (Exception exc) {
                 return BadRequest(exc.Message);
             }
         }
 
-        [HttpPut("Alterar")]
+        [HttpPut]
+        [Route("Alterar")]
         [Authorize(Roles = "Administrador")]
         public IActionResult Alterar(Medico medico) {
             try {
                 Repositorio.Alterar(medico);
-                return Ok(Repositorio.Listar());
+                return Ok($"Medico {medico.Nome} alterado com sucesso");
             } catch (Exception exc) {
                 return BadRequest(exc.Message);
             }
