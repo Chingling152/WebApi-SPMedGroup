@@ -36,7 +36,7 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
         /// Lista todos os pacientes do banco de dados
         /// </summary>
         /// <returns>Uma lista com todos os pacientes</returns>
-        public List<Paciente> Listar() => new SpMedGroupContext().Paciente.ToList();
+        public List<Paciente> Listar() => new SpMedGroupContext().Paciente.Include(i => i.IdUsuarioNavigation).ToList();
 
         /// <summary>
         /// Retorna todas as informações de um paciente selecionado pelo ID
@@ -75,7 +75,7 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
                                 Consulta = (
 
                                     from Co in ctx.Consulta
-                                    join Me in ctx.Medico on Co.Id equals Me.Id
+                                    join Me in ctx.Medico on Co.IdMedico equals Me.Id
                                     join Cl in ctx.Clinica on Me.IdClinica equals Cl.Id        // Clinica
                                     join Es in ctx.Especialidade on Me.IdEspecialidade equals Es.Id
                                     where Co.IdPaciente == Pa.Id
@@ -87,6 +87,7 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
                                         StatusConsulta = Co.StatusConsulta,
                                         IdMedico = Co.IdMedico,
                                         IdPaciente = Co.IdPaciente,
+                                        IdPacienteNavigation = Pa,
                                         IdMedicoNavigation = new Medico(){
                                             Id = Me.Id,
                                             Nome = Me.Nome,

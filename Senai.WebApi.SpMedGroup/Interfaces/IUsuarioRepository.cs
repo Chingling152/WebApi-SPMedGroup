@@ -1,4 +1,5 @@
 ﻿using Senai.WebApi.SpMedGroup.Domains;
+using Senai.WebApi.SpMedGroup.Enums;
 using System.Collections.Generic;
 
 namespace Senai.WebApi.SpMedGroup.Interfaces {
@@ -24,6 +25,13 @@ namespace Senai.WebApi.SpMedGroup.Interfaces {
         /// <param name="ID">ID Do Usuario a ser procurado</param>
         /// <returns></returns>
         Usuario Listar(int ID);
+
+        /// <summary>
+        /// Lista todos os usuarios de determinado tipo
+        /// </summary>
+        /// <param name="tipoUsuario">Tipo de usuario</param>
+        /// <returns>Uma lista com todos usuarios com um nivel de privilegio especifico</returns>
+        List<Usuario> Listar(EnTipoUsuario tipoUsuario);
 
         /// <summary>
         /// Procura um usuario com a combinação de Email e Senha

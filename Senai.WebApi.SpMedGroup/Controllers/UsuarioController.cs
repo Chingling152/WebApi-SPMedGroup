@@ -8,6 +8,8 @@ using Senai.WebApi.SpMedGroup.Domains;
 using Senai.WebApi.SpMedGroup.Interfaces;
 using Senai.WebApi.SpMedGroup.ViewModel;
 using Senai.WebApi.SpMedGroup.Repositories.EntityFramework;
+using Senai.WebApi.SpMedGroup.Enums;
+using System.Collections.Generic;
 
 namespace Senai.WebApi.SpMedGroup.Controllers
 {
@@ -30,6 +32,19 @@ namespace Senai.WebApi.SpMedGroup.Controllers
                 return BadRequest(exc.Message);
             }
         }
+
+        [HttpGet]
+        [Route("Listar/{tipousuario}")]
+        [Authorize(Roles = "Administrador")]
+        public IActionResult Listar(int tipousuario) {
+            try {
+                EnTipoUsuario tipoUsuario = (EnTipoUsuario)tipousuario;
+                return Ok(Repositorio.Listar(tipoUsuario));
+            } catch (Exception exc) {
+                return BadRequest(exc.Message);
+            }
+        }
+
 
         [HttpPost]
         [Route("Cadastrar")]

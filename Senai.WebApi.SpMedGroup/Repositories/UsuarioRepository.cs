@@ -3,6 +3,7 @@ using System.Data.SqlClient;
 using System.Collections.Generic;
 using Senai.WebApi.SpMedGroup.Domains;
 using Senai.WebApi.SpMedGroup.Interfaces;
+using Senai.WebApi.SpMedGroup.Enums;
 
 namespace Senai.WebApi.SpMedGroup.Repositories {
     /// <summary>
@@ -94,6 +95,10 @@ namespace Senai.WebApi.SpMedGroup.Repositories {
                 }
             }
             throw new NullReferenceException("Não existe usuario com o ID selecionado"); 
+        }
+
+        public List<Usuario> Listar(EnTipoUsuario tipoUsuario) {
+            throw new NotImplementedException("Metodo será implementado na Versão 2 da API");
         }
 
         /// <summary>

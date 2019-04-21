@@ -1,4 +1,6 @@
-﻿using Senai.WebApi.SpMedGroup.Enums;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Senai.WebApi.SpMedGroup.Enums;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -22,6 +24,7 @@ namespace Senai.WebApi.SpMedGroup.Domains
         public string Descricao { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "A Consulta precisa ter uma situação")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public EnSituacaoConsulta StatusConsulta { get; set; }
 
         public Medico IdMedicoNavigation { get; set; }

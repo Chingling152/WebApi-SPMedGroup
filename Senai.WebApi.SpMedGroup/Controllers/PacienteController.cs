@@ -39,7 +39,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers
                 int ID = Convert.ToInt32(
                     HttpContext.User.Claims.First(x=> x.Type == JwtRegisteredClaimNames.Jti).Value
                 );
-                return Ok(Repositorio.VerConsultas(ID));
+                return Ok(Repositorio.VerConsultas(ID).Consulta);
             } catch (Exception exc) {
                 return BadRequest(exc.Message);
             }
@@ -52,11 +52,6 @@ namespace Senai.WebApi.SpMedGroup.Controllers
             try {
                 if(paciente.DataNascimento > DateTime.Now) {
                     throw new Exception("Data de nascimento invalida");
-                }
-                foreach (char i in paciente.Cpf){
-                    if(!char.IsDigit(i)) {
-                        throw new Exception("O CPF Deve conter apenas numeros");
-                    }
                 }
                 Repositorio.Cadastrar(paciente);
                 return Ok($"Paciente {paciente.Nome} cadastrado com sucesso");

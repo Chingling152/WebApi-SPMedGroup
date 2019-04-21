@@ -48,13 +48,13 @@ namespace Senai.WebApi.SpMedGroup.Controllers {
 
         [HttpGet]
         [Route("VerConsultas")]
-        [Authorize(Roles = "Medico,Administrador")]
+        [Authorize(Roles = "Medico")]
         public IActionResult VerConsultas() {
             try {
                 int ID = Convert.ToInt32(
                     HttpContext.User.Claims.First(i => i.Type == JwtRegisteredClaimNames.Jti).Value
                 );
-                return Ok("");
+                return Ok(Repositorio.VerConsultas(ID).Consulta);
             } catch (Exception exc) {
                 return BadRequest(exc.Message);
             }

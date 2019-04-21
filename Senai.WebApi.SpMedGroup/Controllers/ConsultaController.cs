@@ -34,7 +34,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers {
         public IActionResult Cadastrar(Consulta consulta) {
             try {
                 Repositorio.Cadastrar(consulta);
-                return Ok("Consulta cadastrada com suecsso");
+                return Ok("Consulta cadastrada com sucesso");
             } catch (Exception exc) {
                 return BadRequest(exc.Message);
             }
@@ -46,7 +46,7 @@ namespace Senai.WebApi.SpMedGroup.Controllers {
         public IActionResult Alterar(Consulta consulta) {
             try {
                 Repositorio.Alterar(consulta);
-                return Ok(Repositorio.Listar());
+                return Ok("Consulta alterada com sucesso");
             } catch (Exception exc) {
                 return BadRequest(exc.Message);
             }

@@ -36,6 +36,7 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
         /// Lista todas as consultas do banco de dados
         /// </summary>
         /// <returns>Uma lista com todas as consultas registradas</returns>
-        public List<Consulta> Listar() => new SpMedGroupContext().Consulta.ToList();
+
+        public List<Consulta> Listar() => new SpMedGroupContext().Consulta.Include(p => p.IdPacienteNavigation).Include(x => x.IdMedicoNavigation).ThenInclude(i => i.IdClinicaNavigation).Include(j => j.IdMedicoNavigation.IdEspecialidadeNavigation).ToList();
     }
 }

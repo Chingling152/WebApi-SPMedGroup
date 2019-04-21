@@ -36,7 +36,7 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
         /// Lista todos os medicos do banco de dados
         /// </summary>
         /// <returns>Uma lista com todos os medicos</returns>
-        public List<Medico> Listar() => new SpMedGroupContext().Medico.Include(i=> i.IdEspecialidadeNavigation).ToList();
+        public List<Medico> Listar() => new SpMedGroupContext().Medico.Include(i=> i.IdEspecialidadeNavigation).Include(j => j.IdClinicaNavigation).ToList();
 
         /// <summary>
         /// Procura um medico no ID selecionado no banco de dados
@@ -44,10 +44,10 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
         /// <param name="ID">ID do medico</param>
         /// <returns>Retorna um Medico e sua especialidade , ou uma excessão caso ele não exista</returns>
         public Medico Listar(int ID) {
-            Medico medico = new SpMedGroupContext().Medico.Include(i => i.IdEspecialidadeNavigation).First(i => i.Id == ID);
+            Medico medico = new SpMedGroupContext().Medico.Include(i => i.IdEspecialidadeNavigation).Include(j => j.IdClinicaNavigation).First(i => i.Id == ID);
 
             if (medico == null)
-                    throw new System.NullReferenceException($"Não existe medico no ID {ID}");
+                throw new System.NullReferenceException($"Não existe medico no ID {ID}");
 
             return medico;
         }
@@ -77,8 +77,8 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
                         IdUsuarioNavigation = Us,
                         Consulta = (
                                 from Co in ctx.Consulta
-                                join Pa in ctx.Paciente on Co.Id equals Pa.Id
-                                where Co.IdPaciente == Pa.Id
+                                join Pa in ctx.Paciente on Co.IdPaciente equals Pa.Id
+                                where Co.IdMedico == Me.Id
 
                                 select new Consulta() {
                                     Id = Co.Id,
@@ -86,6 +86,15 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
                                     Descricao = Co.Descricao,
                                     StatusConsulta = Co.StatusConsulta,
                                     IdMedico = Co.IdMedico,
+                                    IdMedicoNavigation = new Medico() {
+                                        Id = Me.Id,
+                                        Nome = Me.Nome,
+                                        Crm = Me.Crm,
+                                        IdClinica = Me.IdClinica,
+                                        IdClinicaNavigation = Cl,
+                                        IdEspecialidade = Me.IdEspecialidade,
+                                        IdEspecialidadeNavigation = Es
+                                    },
                                     IdPaciente = Co.IdPaciente,
                                     IdPacienteNavigation = Pa
                                 }

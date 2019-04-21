@@ -3,6 +3,8 @@ using System.Linq;
 using System.Collections.Generic;
 using Senai.WebApi.SpMedGroup.Domains;
 using Senai.WebApi.SpMedGroup.Interfaces;
+using Senai.WebApi.SpMedGroup.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
     /// <summary>
@@ -37,6 +39,29 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
                 throw new NullReferenceException($"O Usuario no ID {ID} não existe");
 
             return usuario;
+        }
+
+        public List<Usuario> Listar(EnTipoUsuario tipoUsuario) {
+            using (SpMedGroupContext ctx = new SpMedGroupContext()) {
+                List<Usuario> usuarios ;
+                switch (tipoUsuario) {
+                    case EnTipoUsuario.Paciente:
+                        usuarios = ctx.Usuario.Include(i => i.Paciente).Where(t => t.TipoUsuario.Equals(tipoUsuario)).ToList();
+                        break;
+                    case EnTipoUsuario.Medico:
+                        usuarios = ctx.Usuario.Include(i => i.Medico).Where(t => t.TipoUsuario.Equals(tipoUsuario)).ToList();
+                        break;
+                    case EnTipoUsuario.Administrador:
+                        usuarios = ctx.Usuario.Where(t => t.TipoUsuario.Equals(tipoUsuario)).ToList();
+                        break;
+                    default:
+                        throw new NullReferenceException("Valor invalido para tipo e usuario");
+                }
+                if(usuarios.Count < 1) {
+                    throw new NullReferenceException("Não existe nenhum usuario com esse tipo cadastrado");
+                }
+                return usuarios;
+            }
         }
 
         /// <summary>
