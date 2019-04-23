@@ -58,6 +58,18 @@ namespace Senai.WebApi.SpMedGroup.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("Alterar")]
+        [Authorize(Roles = "Administrador")]
+        public IActionResult Alterar(Usuario usuario) {
+            try {
+                Repositorio.Alterar(usuario);
+                return Ok($"Usuario alterado com sucesso");
+            } catch (Exception exc) {
+                return BadRequest(exc.Message);
+            }
+        }
+
 
         [HttpPost]
         [Route("Login")]

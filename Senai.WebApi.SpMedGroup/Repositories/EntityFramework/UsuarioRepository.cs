@@ -11,6 +11,18 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
     /// Classe responsavel por cadastrar e listar Usuarios (independente de serm administradores , medicos ou pacientes)
     /// </summary>
     public class UsuarioRepository : IUsuarioRepository {
+           
+        /// <summary>
+        /// Altera todos os valores de um usuario 
+        /// </summary>
+        /// <param name="usuario">Usuario com os valores já alterados (precisa ID)</param>
+        public void Alterar(Usuario usuario) {
+            using (SpMedGroupContext ctx = new SpMedGroupContext()) {
+                ctx.Usuario.Update(usuario);
+                ctx.SaveChanges();
+            }
+        }
+
         /// <summary>
         /// Cadastra um usuario no banco de dados
         /// </summary>

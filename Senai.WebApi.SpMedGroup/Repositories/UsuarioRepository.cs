@@ -13,6 +13,10 @@ namespace Senai.WebApi.SpMedGroup.Repositories {
 
         private const string Database = "Data Source = .\\MEUSERVIDOR; initial catalog = SENAI_SP_MEDGROUP;user id = sa ; pwd = 132";
 
+        public void Alterar(Usuario usuario) {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Cadastra um administrador no banco de dados , qualquer outro tipo de usuario será negado
         /// </summary>

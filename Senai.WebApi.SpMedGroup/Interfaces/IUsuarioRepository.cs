@@ -14,6 +14,12 @@ namespace Senai.WebApi.SpMedGroup.Interfaces {
         void Cadastrar(Usuario usuario);
 
         /// <summary>
+        /// Altera todos os valores de um usuario
+        /// </summary>
+        /// <param name="usuario">Usuario com todos os valores ja alterados</param>
+        void Alterar(Usuario usuario);
+
+        /// <summary>
         /// Lista todos os usuarios no banco de dados
         /// </summary>
         /// <returns>Uma lista com todos os usuarios</returns>
