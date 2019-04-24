@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Senai.WebApi.SpMedGroup.Domains;
@@ -20,10 +21,20 @@ namespace Senai.WebApi.SpMedGroup.Controllers
 
         [HttpGet]
         [Route("Listar")]
-        [Authorize(Roles = "Administrador")]
         public IActionResult Listar() {
             try {
                 return Ok(Repositorio.Listar());
+            } catch (Exception exc) {
+                return BadRequest(exc.Message);
+            }
+        }
+
+        [HttpGet("Listar{quant}")]
+        public IActionResult ListarQuantidade(int quant) {
+            try {
+                if (quant <= 0)
+                    quant = 1;
+                return Ok(Repositorio.Listar().Take(quant));
             } catch (Exception exc) {
                 return BadRequest(exc.Message);
             }

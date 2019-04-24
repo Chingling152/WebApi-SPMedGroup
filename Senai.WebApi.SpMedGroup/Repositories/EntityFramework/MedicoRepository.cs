@@ -36,7 +36,7 @@ namespace Senai.WebApi.SpMedGroup.Repositories.EntityFramework {
         /// Lista todos os medicos do banco de dados
         /// </summary>
         /// <returns>Uma lista com todos os medicos</returns>
-        public List<Medico> Listar() => new SpMedGroupContext().Medico.Include(i=> i.IdEspecialidadeNavigation).Include(j => j.IdClinicaNavigation).ToList();
+        public List<Medico> Listar() => new SpMedGroupContext().Medico.Include(i=> i.IdEspecialidadeNavigation).Include(j => j.IdClinicaNavigation).Include(k => k.IdUsuarioNavigation).ToList();
 
         /// <summary>
         /// Procura um medico no ID selecionado no banco de dados
